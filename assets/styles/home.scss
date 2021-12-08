@@ -11,17 +11,16 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding-bottom: .5rem;
+    margin-bottom: .5rem;
     display: grid;
-    grid-template-columns: 1fr 5px 1fr 5px 1fr;
-    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
     text-align: center;
     font-size: 2rem;
     color: white;
-    background-color: $primary-color;
+    background-color: white;
 }
 
-.nav div {
-    background-color: white;
-    border-radius: 2.5px;
+.nav a {
+    background-color: $primary-color;
 }
