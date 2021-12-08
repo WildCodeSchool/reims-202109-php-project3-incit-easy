@@ -1,4 +1,4 @@
 @import 'variables.scss';
-body {
-    background: $primary-color;
-}
+@import '/vendor/components/font-awesome/scss/fontawesome.scss';
+@import '/vendor/components/font-awesome/scss/solid.scss';
+@import 'home.scss';
