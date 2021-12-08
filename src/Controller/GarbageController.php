@@ -14,7 +14,6 @@ class GarbageController extends AbstractController
     {
         $allGarbage = $garbageRepository->findById(1);
         $totalGarbage = $allGarbage['nonRecycledWaste'] + $allGarbage['recycledWaste'];
-        
         return $this->render('garbage/index.html.twig', [
             'garbage' => $allGarbage,
             'totalGarbage' => $totalGarbage,
