@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: $primary-color;
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: .5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    background-color: white;
+}
+
+.nav a {
+    background-color: $primary-color;
+}

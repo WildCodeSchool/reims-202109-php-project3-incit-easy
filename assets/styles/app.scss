@@ -1,7 +1,5 @@
 @import 'variables.scss';
-
-body {
-    margin:0;
-    background-color: $wild-color;
-    color: $light;
-}
+@import '/vendor/components/font-awesome/scss/fontawesome.scss';
+@import '/vendor/components/font-awesome/scss/solid.scss';
+@import 'home.scss';
+@import 'garbage.scss';

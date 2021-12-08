@@ -1,0 +1,25 @@
+.progress {
+    position: relative;
+    margin: 4px;
+    text-align: center;
+}
+
+.overflow {
+    width: 280px;
+    height: 125px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 15px solid #eee;
+    border-bottom-color: $secondary-color;
+    border-right-color: $secondary-color;
+    transition-duration: 1.5s;
+    transition-timing-function: ease-out;
+    transform: rotate(45deg);
+}

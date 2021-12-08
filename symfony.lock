@@ -23,6 +23,9 @@
     "amphp/sync": {
         "version": "v1.4.0"
     },
+    "components/font-awesome": {
+        "version": "5.15.4"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
