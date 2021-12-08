@@ -12,10 +12,10 @@ class GarbageController extends AbstractController
     #[Route('/garbage', name: 'garbage')]
     public function index(GarbageRepository $garbageRepository): Response
     {
-        $allGarbage = $garbageRepository->findById(1);
-        $totalGarbage = $allGarbage['nonRecycledWaste'] + $allGarbage['recycledWaste'];
+        $garbage = $garbageRepository->findOneById(1);
+        $totalGarbage =  $garbage->getNonRecycledWaste() + $garbage->getRecycledWaste();
         return $this->render('garbage/index.html.twig', [
-            'garbage' => $allGarbage,
+            'garbage' => $garbage,
             'totalGarbage' => $totalGarbage,
         ]);
     }
