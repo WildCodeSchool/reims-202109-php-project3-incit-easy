@@ -3,5 +3,11 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
-
+    <div class="progress">
+        <div class="overflow">
+            <div id="bar" class="bar">
+            </div>
+        </div>
+        <span id="bar-percent">35</span>%
+    </div>
 {% endblock %}
