@@ -13,8 +13,8 @@ class GarbageFixtures extends Fixture
         $number = 5;
         for ($i = 0; $i < $number; $i++) {
             $garbage = new Garbage();
-            $garbage->setrecycledWaste($i);
-            $garbage->setnonRecycledWaste($i);
+            $garbage->setRecycledWaste($i);
+            $garbage->setNonRecycledWaste($i);
             $manager->persist($garbage);
         }
         $manager->flush();
