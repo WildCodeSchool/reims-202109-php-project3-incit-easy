@@ -19,8 +19,9 @@ body {
     font-size: 2rem;
     color: white;
     background-color: $primary-color;
-    div {
-        background-color: white;
-        border-radius: 2.5px;
-    }
+}
+
+.nav div {
+    background-color: white;
+    border-radius: 2.5px;
 }
