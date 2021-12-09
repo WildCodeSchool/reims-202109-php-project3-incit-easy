@@ -14,7 +14,7 @@ class GarbageFixtures extends Fixture
         for ($i = 0; $i < $number; $i++) {
             $garbage = new Garbage();
             $garbage->setRecycledWaste($i);
-            $garbage->setNonRecycledWaste($i);
+            $garbage->setNonRecycledWaste($i + (rand(1, 5)));
             $manager->persist($garbage);
         }
         $manager->flush();

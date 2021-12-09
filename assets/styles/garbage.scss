@@ -128,4 +128,37 @@
             margin: 1rem;
         }
     }
+
+    &-detail-container {
+        margin-top: 4rem;
+
+        h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        }
+
+        input:checked+div{
+            display: block;
+        }
+    }
+}
+
+/* dropdown details */
+
+.non-recycled-container {
+    display: none;
+    background-color: darkgreen;
+    width: 80vw;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.recycled-container {
+    display: none;
+    background-color: yellowgreen;
+    max-width: 80vw;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
 }
