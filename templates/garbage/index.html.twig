@@ -3,11 +3,25 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
-    <div class="progress">
-        <div class="overflow">
-            <div id="bar" class="bar">
+    <section class="garbage-dashboard">
+        <div class="garbage-total-container">
+            <h1>Votre dernière levée</h1>
+            <div class="progress">
+                <div class="overflow">
+                    <div id="bar" class="bar">
+                    </div>
+                    <p class="current-garbage">{{ totalGarbage }}kg</p>
+                    <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
+                </div>
+                <span id="bar-percent" hidden>{{ (totalGarbage / 7) * 100 }}</span>
             </div>
         </div>
-        <span id="bar-percent">35</span>%
-    </div>
+        <div class="garbage-detail-container">
+            <h2>Ce que vous avez jeté</h2>
+            <div class="chart">
+                <div style="width:{{ (garbage.nonRecycledWaste / totalGarbage) * 100 }}%" class='nonRecycled part'><p>Sac noir {{ (garbage.nonRecycledWaste / totalGarbage) * 100 }}%</p></div>
+                <div style="width:{{ (garbage.recycledWaste / totalGarbage) * 100 }}%" class='recycled part'><p>Sac jaune {{ (garbage.recycledWaste / totalGarbage) * 100 }}%</p></div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
