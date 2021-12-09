@@ -1,3 +1,8 @@
+:root{
+    --rotation: 0deg;
+    --final-color: red;
+}
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -25,8 +30,29 @@
     border: 20px solid #eee;
     border-bottom-color: $secondary-color;
     border-right-color: $secondary-color;
-    transform: rotate(0deg);
-    transition: transform 1.5s ease-out;
+    animation: 1.5s ease-out .5s forwards rotation;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+        border-top-color: #eee;
+        border-left-color: #eee;
+    }
+    50% {
+        transform: rotate(min(var(--rotation), 180deg));
+        border-top-color: #eee;
+        border-left-color: #eee;
+    }
+    51% {
+        border-top-color: var(--final-color);
+        border-left-color: var(--final-color);
+    }
+    100% {
+        transform: rotate(var(--rotation));
+        border-top-color: var(--final-color);
+        border-left-color: var(--final-color);
+    }
 }
 
 .shift-caliber {

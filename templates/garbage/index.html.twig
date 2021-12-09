@@ -15,7 +15,7 @@
                     <p class="current-garbage">{{ totalGarbage }}kg</p>
                     <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
                 </div>
-                <span id="bar-percent" hidden>{{ ((totalGarbage + 5) / 7) * 100 }}</span>
+                <span id="bar-percent" hidden>{{ ((totalGarbage) / 7) * 100 }}</span>
             </div>
             {% if totalGarbage < 7 %}
                 <p>Génial ! Un vrai exemple pour la communauté !</p>
