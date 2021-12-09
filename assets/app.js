@@ -16,9 +16,8 @@ const percent = document.getElementById('bar-percent');
 const rotation = parseInt(Math.min((percent.innerHTML * 1.8), 360), 10);
 
 if (parseInt(percent.innerHTML, 10) >= 100) {
-    bar.style.borderTopColor = "red";
-    bar.style.borderLeftColor = "red";
+    bar.style.borderTopColor = 'red';
+    bar.style.borderLeftColor = 'red';
 }
-
 
 bar.style.transform = `rotate(${rotation}deg)`;

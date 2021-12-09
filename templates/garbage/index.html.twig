@@ -17,6 +17,13 @@
                 </div>
                 <span id="bar-percent" hidden>{{ ((totalGarbage + 5) / 7) * 100 }}</span>
             </div>
+            {% if totalGarbage < 7 %}
+                <p>Génial ! Un vrai exemple pour la communauté !</p>
+            {% elseif totalGarbage == 7 %}
+                <p>Bravo ! Vous avez respecté votre objectif !</p>
+            {% else %}
+                <p>Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
+            {% endif %}
         </div>
         <div class="garbage-detail-container">
             <h2>Ce que vous avez jeté</h2>
