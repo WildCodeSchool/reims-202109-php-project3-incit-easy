@@ -1,3 +1,10 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;  
+    font-family: 'Jost', sans-serif;
+}
+
 .progress {
     position: relative;
     margin: 4px;
@@ -5,21 +12,191 @@
 }
 
 .overflow {
-    width: 280px;
-    height: 125px;
+    width: 300px;
+    height: 150px;
     overflow: hidden;
     position: relative;
 }
 
 .bar {
     position: absolute;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    border: 15px solid #eee;
-    border-bottom-color: $secondary-color;
-    border-right-color: $secondary-color;
-    transition-duration: 1.5s;
-    transition-timing-function: ease-out;
+    border: 20px solid #eee;
+    border-bottom-color: $tertiary-color;
+    border-right-color: $tertiary-color;
+    animation: 1.5s ease-out .5s forwards rotation;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+        border-top-color: #eee;
+        border-left-color: #eee;
+    }
+
+    50% {
+        transform: rotate(min(var(--rotation, 0deg), 180deg));
+        border-top-color: #eee;
+        border-left-color: #eee;
+    }
+
+    51% {
+        border-top-color: var(--final-color, rgb(241, 75, 75));
+        border-left-color: var(--final-color, rgb(241, 75, 75));
+    }
+
+    100% {
+        transform: rotate(var(--rotation, 0deg));
+        border-top-color: var(--final-color, rgb(241, 75, 75));
+        border-left-color: var(--final-color, rgb(241, 75, 75));
+    }
+}
+
+.shift-caliber {
+    height: 100%;
+    width: 100%;
+    transform-origin: bottom center;
     transform: rotate(45deg);
+}
+
+.current-garbage {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: white;
+}
+
+.max-garbage {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* bin chart detail */
+
+.chart {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    height: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .part {
+        height: 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            text-align: center;
+            width: 100%;
+        }
+    }
+}
+
+.recycled {
+    background-color: yellowgreen;
+}
+
+.nonRecycled {
+    background-color: darkgreen;
+}
+
+.garbage {
+    &-dashboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &-total-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        background: #1d8655;
+        height: 55vh;
+        border-bottom-left-radius: 50% 20%;
+        border-bottom-right-radius: 50% 20%;
+
+        h1 {
+            font-size: 2rem;
+            color: white;
+            margin: 1rem;
+        }
+
+        .commentary {
+            margin-top: 2rem;
+            color: #eee;
+            width: 70%;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+
+    &-detail-container {
+        margin-top: 1.5rem;
+        width: 80;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #eee;
+        }
+    }
+
+    &-details>*{
+        display: grid;
+        grid-template-columns: 3fr 2fr 8fr;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        p {
+            background-color: $secondary-color;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 1;
+        }
+    }
+}
+
+.line-progress {
+    &-container {
+        height: 1rem;
+        background: #eee;
+        border-radius: .5rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        left: -1rem;
+        text-align: center;
+    }
+
+    &-bar {
+        height: 90%;
+        background: $secondary-color;
+        border-radius: .45rem;
+        margin-left: .1rem;
+    }
+}
+
+.icon {
+    font-size: 3rem;
+    color: white;
 }
