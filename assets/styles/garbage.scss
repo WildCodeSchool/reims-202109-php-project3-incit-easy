@@ -1,8 +1,3 @@
-:root{
-    --rotation: 0deg;
-    --final-color: rgb(241, 75, 75);
-}
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -41,18 +36,18 @@
         border-left-color: #eee;
     }
     50% {
-        transform: rotate(min(var(--rotation), 180deg));
+        transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
     }
     51% {
-        border-top-color: var(--final-color);
-        border-left-color: var(--final-color);
+        border-top-color: var(--final-color, rgb(241, 75, 75));
+        border-left-color: var(--final-color, rgb(241, 75, 75));
     }
     100% {
-        transform: rotate(var(--rotation));
-        border-top-color: var(--final-color);
-        border-left-color: var(--final-color);
+        transform: rotate(var(--rotation, 0deg));
+        border-top-color: var(--final-color, rgb(241, 75, 75));
+        border-left-color: var(--final-color, rgb(241, 75, 75));
     }
 }
 
