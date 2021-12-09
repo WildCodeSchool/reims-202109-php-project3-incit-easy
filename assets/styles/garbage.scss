@@ -25,8 +25,14 @@
     border: 20px solid #eee;
     border-bottom-color: $secondary-color;
     border-right-color: $secondary-color;
-    transition-duration: 1.5s;
-    transition-timing-function: ease-out;
+    transform: rotate(0deg);
+    transition: transform 1.5s ease-out;
+}
+
+.shift-caliber {
+    height: 100%;
+    width: 100%;
+    transform-origin: bottom center;
     transform: rotate(45deg);
 }
 

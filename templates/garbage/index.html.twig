@@ -8,12 +8,14 @@
             <h1>Votre dernière levée</h1>
             <div class="progress">
                 <div class="overflow">
-                    <div id="bar" class="bar">
+                    <div class="shift-caliber">
+                        <div id="bar" class="bar">
+                        </div>
                     </div>
                     <p class="current-garbage">{{ totalGarbage }}kg</p>
                     <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
                 </div>
-                <span id="bar-percent" hidden>{{ (totalGarbage / 7) * 100 }}</span>
+                <span id="bar-percent" hidden>{{ ((totalGarbage + 5) / 7) * 100 }}</span>
             </div>
         </div>
         <div class="garbage-detail-container">

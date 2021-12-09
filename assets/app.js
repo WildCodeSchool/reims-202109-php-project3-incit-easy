@@ -13,6 +13,12 @@ import './styles/app.scss';
 const bar = document.getElementById('bar');
 const percent = document.getElementById('bar-percent');
 
-const rotation = parseInt(45 + (percent.innerHTML * 1.8), 10);
+const rotation = parseInt(Math.min((percent.innerHTML * 1.8), 360), 10);
+
+if (parseInt(percent.innerHTML, 10) >= 100) {
+    bar.style.borderTopColor = "red";
+    bar.style.borderLeftColor = "red";
+}
+
 
 bar.style.transform = `rotate(${rotation}deg)`;
