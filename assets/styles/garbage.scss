@@ -35,15 +35,18 @@
         border-top-color: #eee;
         border-left-color: #eee;
     }
+
     50% {
         transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
     }
+
     51% {
         border-top-color: var(--final-color, rgb(241, 75, 75));
         border-left-color: var(--final-color, rgb(241, 75, 75));
     }
+
     100% {
         transform: rotate(var(--rotation, 0deg));
         border-top-color: var(--final-color, rgb(241, 75, 75));
@@ -84,7 +87,7 @@
     height: 2rem;
     border-radius: 1rem;
     overflow: hidden;
-    
+
     .part {
         height: 2rem;
         display: flex;
