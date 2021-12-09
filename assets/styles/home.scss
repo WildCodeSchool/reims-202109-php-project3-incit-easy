@@ -4,14 +4,13 @@
 }
 
 body {
-    background: $primary-color;
+    background: rgb(95, 197, 126);
 }
 
 .nav {
     position: fixed;
     bottom: 0;
     width: 100%;
-    margin-bottom: .5rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3px;
@@ -22,5 +21,7 @@ body {
 }
 
 .nav a {
-    background-color: $primary-color;
+    background-color: #1d8655;
+    height: 100%;
+    padding: 3px;
 }
