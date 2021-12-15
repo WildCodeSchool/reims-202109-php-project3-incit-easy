@@ -28,7 +28,7 @@ class Garbage
     private float $nonRecycledWaste;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      */
     private \DateTimeImmutable $createdAt;
 
