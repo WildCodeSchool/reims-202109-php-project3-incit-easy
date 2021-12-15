@@ -21,4 +21,11 @@ class GarbageFixtures extends Fixture
         }
         $manager->flush();
     }
+
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
+    }
 }
