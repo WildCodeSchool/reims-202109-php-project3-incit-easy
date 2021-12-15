@@ -27,6 +27,16 @@ class Garbage
      */
     private float $nonRecycledWaste;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private \DateTimeImmutable $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="garbages")
+     */
+    private ?User $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,6 +74,30 @@ class Garbage
     public function setNonRecycledWaste(float $nonRecycledWaste): self
     {
         $this->nonRecycledWaste = $nonRecycledWaste;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
