@@ -42,7 +42,6 @@ class UserFixture extends Fixture
         $userTwo->setStreet('45 rue de richard');
         $userTwo->setZipcode('51100');
         $userTwo->setCity('Reims');
-        $userTwo->setCreatedAt(new DateTimeImmutable());
         $hashedPassword = $this->passwordHasher->hashPassword(
             $userTwo,
             'usertwopassword'
