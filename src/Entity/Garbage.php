@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GarbageRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,11 @@ class Garbage
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="garbages")
      */
     private ?User $user;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable("now");
+    }
 
     public function getId(): ?int
     {
