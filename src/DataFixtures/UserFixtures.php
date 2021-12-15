@@ -3,12 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixture extends Fixture
+class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -50,7 +49,7 @@ class UserFixture extends Fixture
 
         $userTwo->setPassword($hashedPassword);
         $manager->persist($userTwo);
-        $this->addReference("user_0", $userOne);
+        $this->addReference("user_1", $userTwo);
 
 
         // Sauvegarde des 2 nouveaux utilisateurs :
