@@ -27,6 +27,11 @@ class Garbage
      */
     private float $nonRecycledWaste;
 
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private \DateTimeImmutable $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,6 +69,18 @@ class Garbage
     public function setNonRecycledWaste(float $nonRecycledWaste): self
     {
         $this->nonRecycledWaste = $nonRecycledWaste;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
