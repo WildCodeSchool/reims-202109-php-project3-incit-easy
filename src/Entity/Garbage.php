@@ -32,6 +32,11 @@ class Garbage
      */
     private \DateTimeImmutable $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="garbages")
+     */
+    private ?User $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +86,18 @@ class Garbage
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -62,6 +62,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private \DateTimeImmutable $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Garbage::class, mappedBy="user")
+     */
+    private Collection $garbages;
+
+    public function __construct()
+    {
+        $this->garbages = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +219,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Garbage[]
+     */
+    public function getGarbages(): Collection
+    {
+        return $this->garbages;
+    }
+
+    public function addGarbage(Garbage $garbage): self
+    {
+        if (!$this->garbages->contains($garbage)) {
+            $this->garbages[] = $garbage;
+            $garbage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGarbage(Garbage $garbage): self
+    {
+        if ($this->garbages->removeElement($garbage)) {
+            // set the owning side to null (unless already changed)
+            if ($garbage->getUser() === $this) {
+                $garbage->setUser(null);
+            }
+        }
 
         return $this;
     }
