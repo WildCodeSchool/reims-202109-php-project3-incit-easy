@@ -18,6 +18,11 @@
                 </div>
                 <span id="bar-percent" hidden>{{ (total_garbage / 7) * 100 }}</span>
             </div>
+            <div class='warning-container'>
+                <div class='first-warning warning'></div>
+                <div class='second-warning warning'></div>
+                <div class='final-warning warning'></div>
+            </div>
             {% if total_garbage < 7 %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
             {% elseif total_garbage == 7 %}
