@@ -17,7 +17,11 @@ class GarbageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        return $this->render('garbage/index.html.twig');
+        $garbages = $garbageRepository->findAll();
+
+        return $this->render('garbage/index.html.twig', [
+            "garbages" => $garbages,
+        ]);
     }
 
     #[Route('/{id}', name: 'show')]

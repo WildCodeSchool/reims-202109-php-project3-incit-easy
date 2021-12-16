@@ -1,0 +1,12 @@
+<section>
+    <ul>
+    {% for garbage in garbages %}
+        {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
+        <li>
+            <p>{{ garbage.getCreatedAt|date("m/d/Y") }} -
+            {{ total_garbage }} kg -
+            </p>
+        </li>
+    {% endfor %}
+    </ul>
+</section>
