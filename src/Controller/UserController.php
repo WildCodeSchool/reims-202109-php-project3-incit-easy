@@ -26,11 +26,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/garbage', name: 'user')]
-    public function showGarbages(User $user): Response
+    #[Route('/{id}/garbage', name: 'garbage')]
+    public function showGarbages(User $user, ?int $limit): Response
     {
+        if (!$limit) {
+            $limit = count($user->getGarbages());
+        }
         return $this->render('user/show_garbages.html.twig', [
             "user" => $user,
+            "limit" => $limit,
         ]);
     }
 }

@@ -1,8 +1,9 @@
-<section>
+<section class="garbage-list-section">
+    <h2>Historique des levées</h2>
     {% set user = (garbages|last).user %}
     {% if app.user == user %}
-    <ul>
-    {% for garbage in garbages|reverse %}
+    <ul class="garbage-list">
+    {% for garbage in garbages|reverse|slice(0, limit) %}
         {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
         <li>
             <a href="{{ path("garbage_show", {id: garbage.getId}) }}">

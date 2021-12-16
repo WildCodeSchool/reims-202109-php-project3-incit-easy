@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div>
+<div class="profile">
     {{ render(controller('App\\Controller\\UserController::show', {user: user})) }}
-    {{ render(controller('App\\Controller\\UserController::showGarbages', {user: user})) }}
+    <div class="profile-garbage">
+        {{ render(controller('App\\Controller\\UserController::showGarbages', {user: user, limit: limit})) }}
+        <div class="see-more-garbage">
+            <a href="{{ path('user_garbage', {id: user.id}) }}">Voir plus</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
