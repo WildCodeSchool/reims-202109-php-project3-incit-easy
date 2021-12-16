@@ -14,8 +14,21 @@ const percent = document.getElementById('bar-percent');
 
 const rotation = parseInt(Math.min((percent.innerHTML * 1.8), 360), 10);
 
+const firstWarning = document.querySelector('.first-warning');
+const secondWarning = document.querySelector('.second-warning');
+const finalWarning = document.querySelector('.final-warning');
+
 document.documentElement.style.setProperty('--rotation', `${rotation}deg`);
 
-if (percent.innerHTML < 100) {
+if (percent.innerHTML <= 100) {
     document.documentElement.style.setProperty('--final-color', '#eee');
+} else if (percent.innerHTML > 100 && percent.innerHTML < 133) {
+    firstWarning.style.backgroundColor = 'yellow';
+} else if (percent.innerHTML > 133 && percent.innerHTML < 166) {
+    firstWarning.style.backgroundColor = 'yellow';
+    secondWarning.style.backgroundColor = 'orange';
+} else {
+    firstWarning.style.backgroundColor = 'yellow';
+    secondWarning.style.backgroundColor = 'orange';
+    finalWarning.style.backgroundColor = 'red';
 }
