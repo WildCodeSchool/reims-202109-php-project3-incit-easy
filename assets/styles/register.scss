@@ -1,0 +1,11 @@
+.form-register {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+        display: flex;
+        justify-content: center;
+    }
+}
