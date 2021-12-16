@@ -16,6 +16,7 @@ class GarbageController extends AbstractController
     public function index(GarbageRepository $garbageRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('garbage/index.html.twig');
     }
 

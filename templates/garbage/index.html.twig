@@ -1,0 +1,7 @@
+{% block body %}
+<section>
+    {% for garbage in app.user.getGarbages %}
+        <p>{{ dump(garbage) }}</p>
+    {% endfor %}
+</section>
+{% endblock %}
