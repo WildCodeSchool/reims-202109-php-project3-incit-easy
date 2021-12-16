@@ -24,6 +24,18 @@ class GarbageController extends AbstractController
         ]);
     }
 
+    #[Route('/latest', name: 'latest')]
+    public function latest(GarbageRepository $garbageRepository): Response
+    {
+        $user = $this->getUser();
+        $garbage = $garbageRepository->findOneByUser($user, [
+            "createdAt" => "DESC",
+        ]);
+        return $this->forward("App\\Controller\\GarbageController::show", [
+            "id" => $garbage->getId(),
+        ]);
+    }
+
     #[Route('/{id}', name: 'show')]
     public function show(Garbage $garbage): Response
     {
