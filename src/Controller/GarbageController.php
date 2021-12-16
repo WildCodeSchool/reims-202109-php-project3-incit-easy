@@ -15,7 +15,7 @@ class GarbageController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(GarbageRepository $garbageRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $garbages = $garbageRepository->findAll();
 
