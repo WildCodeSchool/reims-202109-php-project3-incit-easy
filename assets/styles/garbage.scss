@@ -41,13 +41,13 @@
         border-left-color: #eee;
     }
     51% {
-        border-top-color: var(--final-color, rgb(241, 75, 75));
-        border-left-color: var(--final-color, rgb(241, 75, 75));
+        border-top-color: var(--final-color, $tertiary-color);
+        border-left-color: var(--final-color, $tertiary-color);
     }
     100% {
         transform: rotate(var(--rotation, 0deg));
-        border-top-color: var(--final-color, rgb(241, 75, 75));
-        border-left-color: var(--final-color, rgb(241, 75, 75));
+        border-top-color: var(--final-color, $tertiary-color);
+        border-left-color: var(--final-color, $tertiary-color);
     }
 }
 
@@ -75,6 +75,19 @@
     font-size: 1.5rem;
 }
 
+.warning-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 30vh;
+    .warning {
+        aspect-ratio: 1 / 1;
+        width: 2rem;
+        background-color: $tertiary-color;
+        border-radius: 50%;
+    }
+}
+
 
 /* bin chart detail */
 
@@ -97,14 +110,6 @@
     }
 }
 
-.recycled {
-    background-color: yellowgreen;
-}
-
-.nonRecycled {
-    background-color: darkgreen;
-}
-
 .garbage {
     &-dashboard {
         display: flex;
@@ -117,7 +122,6 @@
         align-items: center;
         position: relative;
         background: #1d8655;
-        height: 55vh;
         border-bottom-left-radius: 50% 20%;
         border-bottom-right-radius: 50% 20%;
         h1 {
@@ -131,6 +135,7 @@
             width: 70%;
             font-size: 1.5rem;
             text-align: center;
+            padding-bottom: 2rem;
         }
     }
     &-detail-container {
