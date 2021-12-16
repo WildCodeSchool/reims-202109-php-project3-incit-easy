@@ -225,11 +225,11 @@
     li {
         background: white;
         text-align: center;
+        padding: .2rem;
 
         a {
             color: $quadrary-color;
             text-decoration: none;
-            height: 1.8rem;
             font-size: 1.4rem;
         }
     }
@@ -253,17 +253,26 @@
     .see-more-garbage {
         background-color: white;
         width: 80%;
-        height: 2rem;
         color: grey;
         text-align: center;
         font-size: 1.4rem;
         align-self: center;
         border-radius: 0 0 1rem 1rem;
         border-top: solid grey 0.2rem;
+        padding: .3rem;
+        text-decoration: none;
+        color: grey;
+    }
+}
 
-        a {
-            text-decoration: none;
-            color: grey;
-        }
+.fa {
+    &-smile-beam {
+        color: green;
+    }
+    &-meh {
+        color: orange;
+    }
+    &-frown {
+        color: red;
     }
 }
