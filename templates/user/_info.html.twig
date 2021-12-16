@@ -1,6 +1,5 @@
-<section>
+<section class="user-info">
     <h1>{{ user.username }}</h1>
-    <p>{{ user.email }}</p>
-    <p>{{ user.city }} - {{ user.zipcode }}</p>
-    <p>joined {{ user.createdAt|date("d/m/Y") }}</p>
+    <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
+    <p><i class="fas fa-city"></i> {{ user.city }} - {{ user.zipcode }}</p>
 </section>
