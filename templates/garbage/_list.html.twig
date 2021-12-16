@@ -3,9 +3,17 @@
     {% for garbage in garbages %}
         {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
         <li>
-            <p>{{ garbage.getCreatedAt|date("m/d/Y") }} -
-            {{ total_garbage }} kg -
-            </p>
+            <a href="{{ path("garbage_show", {id: garbage.getId}) }}">
+                {{ garbage.getCreatedAt|date("m/d/Y") }} -
+                {{ total_garbage }} kg -
+                {% if total_garbage < 7 %}
+                <i class="fas fa-smile-beam"></i>
+                {% elseif total_garbage < 12 %}
+                <i class="fas fa-meh"></i>
+                {% else %}
+                <i class="fas fa-frown"></i>
+                {% endif %}
+            </a>
         </li>
     {% endfor %}
     </ul>
