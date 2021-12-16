@@ -2,6 +2,7 @@
 
 {% block body %}
 <div>
+    {{ render(controller('App\\Controller\\UserController::show', {user: user})) }}
     {{ render(controller('App\\Controller\\UserController::showGarbages', {user: user})) }}
 </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 <section>
+    {% set user = (garbages|last).user %}
+    {% if app.user == user %}
     <ul>
-    {% for garbage in garbages %}
+    {% for garbage in garbages|reverse %}
         {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
         <li>
             <a href="{{ path("garbage_show", {id: garbage.getId}) }}">
@@ -17,4 +19,5 @@
         </li>
     {% endfor %}
     </ul>
+    {% endif %}
 </section>

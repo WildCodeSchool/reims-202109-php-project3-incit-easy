@@ -18,6 +18,14 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}', name: 'show')]
+    public function show(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     #[Route('/{id}/garbage', name: 'user')]
     public function showGarbages(User $user): Response
     {
