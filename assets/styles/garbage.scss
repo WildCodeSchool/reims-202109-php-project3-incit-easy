@@ -1,8 +1,8 @@
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;  
-    font-family: 'Jost', sans-serif;
+    box-sizing: border-box;
+    font-family: "Jost", sans-serif;
 }
 
 .progress {
@@ -26,7 +26,7 @@
     border: 20px solid #eee;
     border-bottom-color: $tertiary-color;
     border-right-color: $tertiary-color;
-    animation: 1.5s ease-out .5s forwards rotation;
+    animation: 1.5s ease-out 0.5s forwards rotation;
 }
 
 @keyframes rotation {
@@ -160,7 +160,7 @@
         }
     }
 
-    &-details>*{
+    &-details>* {
         display: grid;
         grid-template-columns: 3fr 2fr 8fr;
         width: 100%;
@@ -187,7 +187,7 @@
     &-container {
         height: 1rem;
         background: #eee;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         display: flex;
         align-items: center;
         width: 100%;
@@ -199,12 +199,82 @@
     &-bar {
         height: 90%;
         background: $secondary-color;
-        border-radius: .45rem;
-        margin-left: .1rem;
+        border-radius: 0.45rem;
+        margin-left: 0.1rem;
     }
 }
 
 .icon {
     font-size: 3rem;
     color: white;
+}
+
+.garbage-list {
+    &-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        h2 {
+            padding: 1rem;
+        }
+    }
+
+    li {
+        background: white;
+        text-align: center;
+        padding: .2rem;
+
+        a {
+            color: $quadrary-color;
+            text-decoration: none;
+            font-size: 1.4rem;
+        }
+    }
+
+    list-style: none;
+    width: 80%;
+    height: 75vh;
+    overflow-y: scroll;
+    border-radius: 1rem;
+}
+
+.profile-garbage {
+    display: flex;
+    flex-direction: column;
+
+    .garbage-list {
+        height: unset;
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    .see-more-garbage {
+        background-color: white;
+        width: 80%;
+        color: grey;
+        text-align: center;
+        font-size: 1.4rem;
+        align-self: center;
+        border-radius: 0 0 1rem 1rem;
+        border-top: solid grey 0.2rem;
+        padding: .3rem;
+        text-decoration: none;
+        color: grey;
+    }
+}
+
+.fa {
+    &-smile-beam {
+        color: green;
+    }
+
+    &-meh {
+        color: orange;
+    }
+
+    &-frown {
+        color: red;
+    }
 }
