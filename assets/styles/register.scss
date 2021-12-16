@@ -1,0 +1,45 @@
+.title-register {
+    color: #eee;
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-register {
+    text-align: center;
+    background-color: $primary-color;
+    border-top-left-radius: 50% 5%;
+    border-top-right-radius: 50% 5%;
+    padding: 2rem;
+
+    label {
+        color: #eee;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    input:not([type="checkbox"]) {
+        display: block;
+        max-width: 100%;
+        box-sizing: border-box;
+        border-radius: 25px;
+        border: none;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    input::placeholder {
+        opacity: 0.2;
+    }
+
+    button {
+        background-color: $tertiary-color;
+        border-radius: 25px;
+        border: none;
+        padding: 0.5rem;
+        margin: 1.5rem 0 1.5rem 0;
+        font-size: 1.5rem;
+        color: #eee;
+    }
+}
