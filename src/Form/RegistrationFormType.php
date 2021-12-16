@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,39 +19,64 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
+            ->add('username', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Bilal51',
+                    'class' => 'form-username'
+                ]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les termes.',
                     ]),
                 ],
+                'attr' => [
+                    'class' => 'form-checkbox',
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'class' => 'form-password',
+                    'placeholder' => 'MoTdEpAsSe34'
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'merci d\'entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit faire plus de {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
             ])
-            ->add('street')
-            ->add('zipcode')
-            ->add('city')
-            ->add('email')
 
+            ->add('street', TextType::class, ['attr' =>
+            ['placeholder' => '6 rue de saint-brice',
+            'class' => 'form-street' ]
+            ])
 
-        ;
+            ->add('zipcode', NumberType::class, ['attr' =>
+            ['placeholder' => '51100',
+            'class' => 'form-zipcode' ]
+            ])
+
+            ->add('city', TextType::class, ['attr' =>
+            ['placeholder' => 'Reims',
+            'class' => 'form-city' ]
+            ])
+
+            ->add('email', TextType::class, ['attr' =>
+            ['placeholder' => 'example@gmail.com',
+            'class' => 'form-email' ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
