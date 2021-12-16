@@ -3,6 +3,7 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
+    {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Votre dernière levée</h1>
@@ -12,14 +13,14 @@
                         <div id="bar" class="bar">
                         </div>
                     </div>
-                    <p class="current-garbage">{{ totalGarbage }}kg</p>
+                    <p class="current-garbage">{{ total_garbage }}kg</p>
                     <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
                 </div>
-                <span id="bar-percent" hidden>{{ (totalGarbage / 7) * 100 }}</span>
+                <span id="bar-percent" hidden>{{ (total_garbage / 7) * 100 }}</span>
             </div>
-            {% if totalGarbage < 7 %}
+            {% if total_garbage < 7 %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
-            {% elseif totalGarbage == 7 %}
+            {% elseif total_garbage == 7 %}
                 <p class="commentary">Bravo ! Vous avez respecté votre objectif !</p>
             {% else %}
                 <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
@@ -32,14 +33,14 @@
                     <p class="fas fa-trash icon"></p>
                     <p><span>{{ garbage.nonRecycledWaste }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (garbage.nonRecycledWaste / totalGarbage) * 100 }}%"></div>
+                        <div class="line-progress-bar" style="width:{{ (garbage.nonRecycledWaste / total_garbage) * 100 }}%"></div>
                     </div>
                 </div>
                 <div class="yellow">
                     <p class="fas fa-recycle icon"></p>
                     <p><span>{{ garbage.recycledWaste }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (garbage.recycledWaste / totalGarbage) * 100 }}%"></div>
+                        <div class="line-progress-bar" style="width:{{ (garbage.recycledWaste / total_garbage) * 100 }}%"></div>
                     </div>
                 </div>
             </div>
