@@ -17,7 +17,9 @@ class GarbageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $garbages = $garbageRepository->findAll();
+        $garbages = $garbageRepository->findBy([], [
+            "createdAt" => "DESC",
+        ]);
 
         return $this->render('garbage/index.html.twig', [
             "garbages" => $garbages,

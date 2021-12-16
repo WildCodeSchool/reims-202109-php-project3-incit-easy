@@ -14,16 +14,6 @@ class HomeController extends AbstractController
      */
     public function index(GarbageRepository $garbageRepository): Response
     {
-        $user = $this->getUser();
-        if ($user) {
-            $garbages = $garbageRepository->findByUser($user);
-            $garbage = end($garbages);
-            $id = $garbage->getId();
-            return $this->redirectToRoute("garbage_show", [
-                "id" => $id,
-            ]);
-        } else {
-            return $this->redirectToRoute("login");
-        }
+        return $this->redirectToRoute("login");
     }
 }
