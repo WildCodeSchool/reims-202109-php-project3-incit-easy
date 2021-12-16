@@ -2,7 +2,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: 'Jost', sans-serif;
+    font-family: "Jost", sans-serif;
 }
 
 .progress {
@@ -26,7 +26,7 @@
     border: 20px solid #eee;
     border-bottom-color: $tertiary-color;
     border-right-color: $tertiary-color;
-    animation: 1.5s ease-out .5s forwards rotation;
+    animation: 1.5s ease-out 0.5s forwards rotation;
 }
 
 @keyframes rotation {
@@ -35,18 +35,18 @@
         border-top-color: #eee;
         border-left-color: #eee;
     }
-    
+
     50% {
         transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
     }
-    
+
     51% {
         border-top-color: var(--final-color, $tertiary-color);
         border-left-color: var(--final-color, $tertiary-color);
     }
-    
+
     100% {
         transform: rotate(var(--rotation, 0deg));
         border-top-color: var(--final-color, $tertiary-color);
@@ -83,7 +83,7 @@
     flex-direction: row;
     justify-content: space-around;
     width: 30vh;
-    
+
     .warning {
         aspect-ratio: 1 / 1;
         width: 2rem;
@@ -102,13 +102,13 @@
     height: 2rem;
     border-radius: 1rem;
     overflow: hidden;
-    
+
     .part {
         height: 2rem;
         display: flex;
         flex-direction: row;
         align-items: center;
-        
+
         p {
             text-align: center;
             width: 100%;
@@ -131,13 +131,13 @@
         background: #1d8655;
         border-bottom-left-radius: 50% 20%;
         border-bottom-right-radius: 50% 20%;
-        
+
         h1 {
             font-size: 2rem;
             color: white;
             margin: 1rem;
         }
-        
+
         .commentary {
             margin-top: 2rem;
             color: #eee;
@@ -151,7 +151,7 @@
     &-detail-container {
         margin-top: 1.5rem;
         width: 80;
-        
+
         h2 {
             text-align: center;
             margin-bottom: 2rem;
@@ -159,14 +159,14 @@
             color: #eee;
         }
     }
-    
+
     &-details>* {
         display: grid;
         grid-template-columns: 3fr 2fr 8fr;
         width: 100%;
         align-items: center;
         margin-bottom: 1rem;
-        
+
         p {
             background-color: $secondary-color;
             width: 3.5rem;
@@ -187,7 +187,7 @@
     &-container {
         height: 1rem;
         background: #eee;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         display: flex;
         align-items: center;
         width: 100%;
@@ -195,12 +195,12 @@
         left: -1rem;
         text-align: center;
     }
-    
+
     &-bar {
         height: 90%;
         background: $secondary-color;
-        border-radius: .45rem;
-        margin-left: .1rem;
+        border-radius: 0.45rem;
+        margin-left: 0.1rem;
     }
 }
 
@@ -216,16 +216,16 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        
+
         h2 {
             padding: 1rem;
         }
     }
-    
+
     li {
         background: white;
         text-align: center;
-        
+
         a {
             color: $quadrary-color;
             text-decoration: none;
@@ -233,6 +233,7 @@
             font-size: 1.4rem;
         }
     }
+
     list-style: none;
     width: 80%;
     height: 75vh;
@@ -243,12 +244,12 @@
 .profile-garbage {
     display: flex;
     flex-direction: column;
-    
+
     .garbage-list {
         height: unset;
         border-radius: 1rem 1rem 0 0;
     }
-    
+
     .see-more-garbage {
         background-color: white;
         width: 80%;
@@ -258,8 +259,8 @@
         font-size: 1.4rem;
         align-self: center;
         border-radius: 0 0 1rem 1rem;
-        border-top: solid grey .2rem;
-        
+        border-top: solid grey 0.2rem;
+
         a {
             text-decoration: none;
             color: grey;
