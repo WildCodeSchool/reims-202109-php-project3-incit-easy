@@ -80,6 +80,7 @@
     flex-direction: row;
     justify-content: space-around;
     width: 30vh;
+    
     .warning {
         aspect-ratio: 1 / 1;
         width: 2rem;
@@ -98,11 +99,13 @@
     height: 2rem;
     border-radius: 1rem;
     overflow: hidden;
+    
     .part {
         height: 2rem;
         display: flex;
         flex-direction: row;
         align-items: center;
+        
         p {
             text-align: center;
             width: 100%;
@@ -124,11 +127,13 @@
         background: #1d8655;
         border-bottom-left-radius: 50% 20%;
         border-bottom-right-radius: 50% 20%;
+        
         h1 {
             font-size: 2rem;
             color: white;
             margin: 1rem;
         }
+        
         .commentary {
             margin-top: 2rem;
             color: #eee;
@@ -141,6 +146,7 @@
     &-detail-container {
         margin-top: 1.5rem;
         width: 80;
+        
         h2 {
             text-align: center;
             margin-bottom: 2rem;
@@ -154,6 +160,7 @@
         width: 100%;
         align-items: center;
         margin-bottom: 1rem;
+        
         p {
             background-color: $secondary-color;
             width: 3.5rem;
@@ -182,6 +189,7 @@
         left: -1rem;
         text-align: center;
     }
+    
     &-bar {
         height: 90%;
         background: $secondary-color;
@@ -202,13 +210,16 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        
         h2 {
             padding: 1rem;
         }
     }
+    
     li {
         background: white;
         text-align: center;
+        
         a {
             color: $quadrary-color;
             text-decoration: none;
@@ -226,10 +237,12 @@
 .profile-garbage {
     display: flex;
     flex-direction: column;
+    
     .garbage-list {
         height: unset;
         border-radius: 1rem 1rem 0 0;
     }
+    
     .see-more-garbage {
         background-color: white;
         width: 80%;
@@ -240,6 +253,7 @@
         align-self: center;
         border-radius: 0 0 1rem 1rem;
         border-top: solid grey .2rem;
+        
         a {
             text-decoration: none;
             color: grey;
