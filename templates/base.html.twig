@@ -25,7 +25,7 @@
 		{% block nav %}
 			{% if app.user %}
 			<nav class="nav">
-				<a href="{{ path('garbage_show', {id: (app.user.garbages|last).id}) }}"><i class="fas fa-home"></i></a>
+				<a href="{{ path('garbage_latest') }}"><i class="fas fa-home"></i></a>
 				<a href="{{ path('profile_show', {id: app.user.id}) }}"><i class="fas fa-user"></i></a>
 				<a><i class="fas fa-users"></i></a>
 			</nav>

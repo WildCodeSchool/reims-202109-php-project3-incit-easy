@@ -17,10 +17,24 @@ class GarbageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $garbages = $garbageRepository->findAll();
+        $garbages = $garbageRepository->findBy([], [
+            "createdAt" => "DESC",
+        ]);
 
         return $this->render('garbage/index.html.twig', [
             "garbages" => $garbages,
+        ]);
+    }
+
+    #[Route('/latest', name: 'latest')]
+    public function latest(GarbageRepository $garbageRepository): Response
+    {
+        $user = $this->getUser();
+        $garbage = $garbageRepository->findOneByUser($user, [
+            "createdAt" => "DESC",
+        ]);
+        return $this->forward("App\\Controller\\GarbageController::show", [
+            "id" => $garbage->getId(),
         ]);
     }
 
