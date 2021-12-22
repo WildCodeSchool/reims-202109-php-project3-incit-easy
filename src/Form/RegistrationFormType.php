@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -57,6 +58,14 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            ->add('nbHousehold', ChoiceType::class, [
+            'choices' => [
+                '1' => ('1'),
+                '2' => ('2'),
+                '3' => ('3'),
+                '4' => ('4'),
+            ]])
 
             ->add('street', TextType::class, ['attr' =>
             ['placeholder' => '6 rue de saint-brice',
