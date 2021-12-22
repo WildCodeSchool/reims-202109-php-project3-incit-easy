@@ -1,0 +1,78 @@
+.post-wall-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .post-wall-head {
+        background-color: $primary-color;
+        border-bottom-left-radius: 50% 20%;
+        border-bottom-right-radius: 50% 20%;
+
+        h1 {
+            font-size: 2.5rem; 
+            color: white;
+            margin-top: 1rem;
+        }
+
+        li {
+            color: white;
+            margin-top: 1.5rem;
+        }
+
+        .post-create {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+            h2 {
+                align-self:flex-start;
+                margin-left: 12vw;
+                color: white;
+            }
+
+            input {
+                margin-bottom: 1rem;
+                width: 80vw;
+                height: 10vh;
+                background-color: rgb(117, 221, 172);
+                border: none;
+                border-radius: 25px;
+            }
+
+            button {
+                margin-bottom: 1rem;
+                width: 20vw;
+                height: 2rem;
+                border: none;
+                border-radius: 25px;
+                font-size: large;
+                font-weight:bolder;
+            }
+        }
+    }
+
+    .post-wall {
+        padding: 1rem;
+
+        .post {
+            text-align: left;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: $primary-color;
+            border-radius: 25px;
+
+            .author {
+                color: white;
+                margin-bottom: 0.5rem;
+            }
+
+            .content {
+                display: block;
+                border-radius: 12px;
+                background-color: white;
+                color: $primary-color;
+                padding: 0.5rem;
+            }
+        }
+    }
+}

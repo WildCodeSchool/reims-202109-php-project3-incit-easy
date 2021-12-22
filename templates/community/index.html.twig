@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommunityController!{% endblock %}
+
+{% block body %}
+    <section class='post-wall-container'>
+        <div class='post-wall-head' id="drop-down">
+            <h1>Votre communauté</h1>
+            <div class='post-create'>
+                <h2>Quoi de neuf ?</h2>
+                <input type='text'>
+                <button type='submit'>Partager</button>
+            </div>
+            <li class="fas fa-chevron-down"></li>
+        </div>
+        <div class='post-wall'>
+            <!-- will be a for each  -->
+            <div class="post">
+                <p class='author'><i class="fas fa-user-circle"></i> Romain38</p>
+                <p class='content'>Hier j'ai découvert les papiers cadeau réutilisable, c'est vraiment sympa et on peut aussi avoir toutes sortes de motifs. Alors pour les gens qui ont pas encore emballé leurs cadeaux, c'est une super option !</p>
+            </div>
+            <div class="post">
+                <p class='author'><i class="fas fa-user-circle"></i> Michel Colas</p>
+                <p class='content'>Attention, cette semaine les éboueurs passent mardi 😊</p>
+            </div>
+            <div class="post">
+                <p class='author'><i class="fas fa-user-circle"></i> Amandinedu38</p>
+                <p class='content'>Quelqu'un aurait retrouvé mon écocup au café Les Etoiles ? J'y suis allé hier et je ne la retrouve plus. Elle est bleue avec mon prénom dessus</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
