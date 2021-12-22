@@ -13,15 +13,15 @@
                         <div id="bar" class="bar">
                         </div>
                     </div>
-                    <p class="current-garbage">{{ total_garbage }}kg</p>
+                    <p class="current-garbage"><span id="total-garbage">{{ total_garbage }}</span>kg</p>
                     <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
                 </div>
                 <span id="bar-percent" hidden>{{ (total_garbage / 7) * 100 }}</span>
             </div>
             <div class='warning-container'>
-                <div class='first-warning warning'></div>
-                <div class='second-warning warning'></div>
-                <div class='final-warning warning'></div>
+                <div class='first-warning warning' id="warning"></div>
+                <div class='second-warning warning' id="warning"></div>
+                <div class='final-warning warning' id="warning"></div>
             </div>
             {% if total_garbage < 7 %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
@@ -38,14 +38,14 @@
                     <p class="fas fa-trash icon"></p>
                     <p><span>{{ garbage.nonRecycledWaste }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (garbage.nonRecycledWaste / total_garbage) * 100 }}%"></div>
+                        <div class="line-progress-bar non-recycled" style="width:{{ (garbage.nonRecycledWaste / total_garbage) * 100 }}%"></div>
                     </div>
                 </div>
                 <div class="yellow">
                     <p class="fas fa-recycle icon"></p>
                     <p><span>{{ garbage.recycledWaste }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (garbage.recycledWaste / total_garbage) * 100 }}%"></div>
+                        <div class="line-progress-bar recycled" style="width:{{ (garbage.recycledWaste / total_garbage) * 100 }}%"></div>
                     </div>
                 </div>
             </div>
