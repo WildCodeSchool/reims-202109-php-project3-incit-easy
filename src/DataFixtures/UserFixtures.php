@@ -25,6 +25,7 @@ class UserFixtures extends Fixture
         $userOne->setStreet('20 rue de babel');
         $userOne->setZipcode('51100');
         $userOne->setCity('Reims');
+        $userOne->setNbHousehold('4');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $userOne,
             'useronepassword'
@@ -42,6 +43,7 @@ class UserFixtures extends Fixture
         $userTwo->setStreet('45 rue de richard');
         $userTwo->setZipcode('51100');
         $userTwo->setCity('Reims');
+        $userTwo->setNbHousehold('4');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $userTwo,
             'usertwopassword'
