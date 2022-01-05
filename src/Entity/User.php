@@ -75,6 +75,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private bool $isVerified = false;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $nbHousehold;
+
     public function __construct()
     {
         $this->garbages = new ArrayCollection();
@@ -270,6 +275,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getNbHousehold(): ?int
+    {
+        return $this->nbHousehold;
+    }
+
+    public function setNbHousehold(int $nbHousehold): self
+    {
+        $this->nbHousehold = $nbHousehold;
 
         return $this;
     }
