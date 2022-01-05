@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Garbage;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 #[Route('/garbage', name: 'garbage_')]

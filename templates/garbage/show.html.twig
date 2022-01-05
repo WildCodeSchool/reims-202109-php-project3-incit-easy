@@ -3,7 +3,7 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
-    {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
+    {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %} {% set total_objectif = 7 * garbage.user.nbHousehold %}
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Votre levée du {{ garbage.createdAt|date("m/d/Y") }}</h1>
@@ -14,18 +14,18 @@
                         </div>
                     </div>
                     <p class="current-garbage">{{ total_garbage }}kg</p>
-                    <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
+                    <p class="max-garbage">{{ total_objectif }}kg <!-- x(times) nbUser --></p>
                 </div>
-                <span id="bar-percent" hidden>{{ (total_garbage / 7) * 100 }}</span>
+                <span id="bar-percent" hidden>{{ (total_garbage / total_objectif) * 100 }}</span>
             </div>
             <div class='warning-container'>
                 <div class='first-warning warning'></div>
                 <div class='second-warning warning'></div>
                 <div class='final-warning warning'></div>
             </div>
-            {% if total_garbage < 7 %}
+            {% if total_garbage < total_objectif %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
-            {% elseif total_garbage == 7 %}
+            {% elseif total_garbage == total_objectif %}
                 <p class="commentary">Bravo ! Vous avez respecté votre objectif !</p>
             {% else %}
                 <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
