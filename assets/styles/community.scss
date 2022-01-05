@@ -24,17 +24,18 @@
             flex-direction: column;
             align-items: center;
             margin-top: 1.5rem;
+            padding: 0 3rem 0 3rem;
 
             h2 {
                 align-self:flex-start;
-                margin-left: 12vw;
+                margin-left: 10vw;
                 color: white;
             }
 
             input {
                 margin-bottom: 1rem;
-                width: 80vw;
-                height: 10vh;
+                width: 100%;
+                padding: 2rem;
                 background-color: rgb(117, 221, 172);
                 border: none;
                 border-radius: 25px;
