@@ -31,12 +31,12 @@ class Garbage
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private string $type;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $weight;
+    private float $weight;
 
     public function __construct()
     {

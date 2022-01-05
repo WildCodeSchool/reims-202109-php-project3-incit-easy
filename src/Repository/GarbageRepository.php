@@ -22,19 +22,17 @@ class GarbageRepository extends ServiceEntityRepository
     // /**
     //  * @return Garbage[] Returns an array of Garbage objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByWeek($value)
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
+            ->andWhere('date_diff(date_add(:val, (6 - weekday(:val)), \'day\'),
+            g.createdAt) < 7')
             ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Garbage

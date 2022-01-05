@@ -30,11 +30,10 @@ class GarbageController extends AbstractController
     public function latest(GarbageRepository $garbageRepository): Response
     {
         $user = $this->getUser();
-        $garbage = $garbageRepository->findOneByUser($user, [
-            "createdAt" => "DESC",
-        ]);
+        $garbages = $garbageRepository->findByWeek('2022-01-05');
+        dd($garbages);
         return $this->forward("App\\Controller\\GarbageController::show", [
-            "id" => $garbage->getId(),
+            "id" => $garbages->getId(),
         ]);
     }
 
