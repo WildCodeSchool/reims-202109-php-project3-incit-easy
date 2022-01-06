@@ -17,18 +17,28 @@ const rotation = parseInt(Math.min((percent.innerHTML * 1.8), 360), 10);
 const firstWarning = document.querySelector('.first-warning');
 const secondWarning = document.querySelector('.second-warning');
 const finalWarning = document.querySelector('.final-warning');
+const progressBar = document.querySelector('.bar');
 
 document.documentElement.style.setProperty('--rotation', `${rotation}deg`);
 
 if (percent.innerHTML <= 100) {
-    document.documentElement.style.setProperty('--final-color', '#eee');
+    document.documentElement.style.setProperty('--final-color', '$tertiary-color');
 } else if (percent.innerHTML > 100 && percent.innerHTML < 133) {
     firstWarning.style.backgroundColor = 'yellow';
+    firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
+    document.documentElement.style.setProperty('--final-color', 'yellow');
 } else if (percent.innerHTML > 133 && percent.innerHTML < 166) {
     firstWarning.style.backgroundColor = 'yellow';
     secondWarning.style.backgroundColor = 'orange';
+    firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
+    secondWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 2s;';
+    document.documentElement.style.setProperty('--final-color', 'orange');
 } else {
     firstWarning.style.backgroundColor = 'yellow';
     secondWarning.style.backgroundColor = 'orange';
     finalWarning.style.backgroundColor = 'red';
+    firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
+    secondWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 2s;';
+    finalWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 3s;';
+    document.documentElement.style.setProperty('--final-color', 'red');
 }

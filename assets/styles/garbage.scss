@@ -26,7 +26,7 @@
     border: 20px solid #eee;
     border-bottom-color: $tertiary-color;
     border-right-color: $tertiary-color;
-    animation: 1.5s ease-out 0.5s forwards rotation;
+    animation: 3s ease-out 0.5s forwards rotation;
 }
 
 @keyframes rotation {
@@ -40,17 +40,23 @@
         transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
+        border-bottom-color: var(--final-color);
+        border-right-color: var(--final-color);
     }
 
     51% {
-        border-top-color: var(--final-color, $tertiary-color);
-        border-left-color: var(--final-color, $tertiary-color);
+        border-top-color: var(--final-color);
+        border-left-color: var(--final-color);
+        border-bottom-color: var(--final-color);
+        border-right-color: var(--final-color);
     }
 
     100% {
         transform: rotate(var(--rotation, 0deg));
-        border-top-color: var(--final-color, $tertiary-color);
-        border-left-color: var(--final-color, $tertiary-color);
+        border-top-color: var(--final-color);
+        border-left-color: var(--final-color);
+        border-bottom-color: var(--final-color);
+        border-right-color: var(--final-color);
     }
 }
 
@@ -90,8 +96,29 @@
         background-color: $tertiary-color;
         border-radius: 50%;
     }
+
+    .first-warning {
+        opacity: 0;
+    }
+
+    .second-warning {
+        opacity: 0;
+    }
+
+    .final-warning {
+        opacity: 0;
+    }
 }
 
+@keyframes pop {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 /* bin chart detail */
 
@@ -194,6 +221,16 @@
         position: relative;
         left: -1rem;
         text-align: center;
+
+        .recycled {
+            animation: load 1s normal forwards;
+            animation-delay: 4s;
+        }
+
+        .non-recycled {
+            animation: load 1s normal forwards;
+            animation-delay: 3s;
+        }
     }
 
     &-bar {
@@ -201,6 +238,18 @@
         background: $secondary-color;
         border-radius: 0.45rem;
         margin-left: 0.1rem;
+        opacity: 0;
+    }
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
 
