@@ -4,14 +4,13 @@
     {% if app.user == user %}
     <ul class="garbage-list">
     {% for garbage in garbages|slice(0, limit) %}
-        {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
         <li>
             <a href="{{ path("garbage_show", {id: garbage.getId}) }}">
                 {{ garbage.getCreatedAt|date("m/d/Y") }} -
-                {{ total_garbage }} kg -
-                {% if total_garbage < 7 %}
+                {{ garbage.weight }} kg -
+                {% if garbage.weight < 7 %}
                 <i class="fas fa-smile-beam"></i>
-                {% elseif total_garbage < 12 %}
+                {% elseif garbage.weight < 12 %}
                 <i class="fas fa-meh"></i>
                 {% else %}
                 <i class="fas fa-frown"></i>

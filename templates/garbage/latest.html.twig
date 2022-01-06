@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} {% endblock %}
+
+{% block body %}
+    {% set total_weight = 0 %}
+    {% for garbage in garbages %}
+        {% set total_weight = total_weight + garbage.weight %}
+    {% endfor %}
+
+    {% set recycled_weight = 0 %}
+    {% for garbage in garbages|filter(garbage => garbage.type == 'recycled') %}
+        {% set recycled_weight = recycled_weight + garbage.weight %}
+    {% endfor %}
+
+    {% set nonrecycled_weight = 0 %}
+    {% for garbage in garbages|filter(garbage => garbage.type == 'nonRecycled') %}
+        {% set nonrecycled_weight = nonrecycled_weight + garbage.weight %}
+    {% endfor %}
+
+    {% set total_objectif = 7 * garbages|first.user.nbHousehold %}
+    <section class="garbage-dashboard">
+        <div class="garbage-total-container">
+            {# <h1>Votre levée du {{ garbage.createdAt|date("m/d/Y") }}</h1> #}
+            <div class="progress">
+                <div class="overflow">
+                    <div class="shift-caliber">
+                        <div id="bar" class="bar">
+                        </div>
+                    </div>
+                    <p class="current-garbage">{{ total_weight }}kg</p>
+                    <p class="max-garbage">{{ total_objectif }}kg <!-- x(times) nbUser --></p>
+                </div>
+                <span id="bar-percent" hidden>{{ (total_weight / total_objectif) * 100 }}</span>
+            </div>
+            <div class='warning-container'>
+                <div class='first-warning warning'></div>
+                <div class='second-warning warning'></div>
+                <div class='final-warning warning'></div>
+            </div>
+            {% if total_weight < total_objectif %}
+                <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
+            {% elseif total_weight == total_objectif %}
+                <p class="commentary">Bravo ! Vous avez respecté votre objectif !</p>
+            {% else %}
+                <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
+            {% endif %}
+        </div>
+        <div class='garbage-detail-container'>
+            <h2>Ce que vous avez jeté</h2>
+            <div class="garbage-details">
+                <div class="black">
+                    <p class="fas fa-trash icon"></p>
+                    <p><span>{{ nonrecycled_weight }}kg</span></p>
+                    <div class="line-progress-container">
+                        <div class="line-progress-bar" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
+                    </div>
+                </div>
+                <div class="yellow">
+                    <p class="fas fa-recycle icon"></p>
+                    <p><span>{{ recycled_weight }}kg</span></p>
+                    <div class="line-progress-container">
+                        <div class="line-progress-bar" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

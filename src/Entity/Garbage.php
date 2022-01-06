@@ -19,16 +19,6 @@ class Garbage
     private int $id;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private float $recycledWaste;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private float $nonRecycledWaste;
-
-    /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"}, nullable="true")
      */
     private ?\DateTimeImmutable $createdAt;
@@ -37,6 +27,16 @@ class Garbage
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="garbages")
      */
     private ?User $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $type;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $weight;
 
     public function __construct()
     {
@@ -56,30 +56,6 @@ class Garbage
     public function setId(int $id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function getRecycledWaste(): ?float
-    {
-        return $this->recycledWaste;
-    }
-
-    public function setRecycledWaste(float $recycledWaste): self
-    {
-        $this->recycledWaste = $recycledWaste;
-
-        return $this;
-    }
-
-    public function getNonRecycledWaste(): ?float
-    {
-        return $this->nonRecycledWaste;
-    }
-
-    public function setNonRecycledWaste(float $nonRecycledWaste): self
-    {
-        $this->nonRecycledWaste = $nonRecycledWaste;
 
         return $this;
     }
@@ -104,6 +80,30 @@ class Garbage
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(float $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
