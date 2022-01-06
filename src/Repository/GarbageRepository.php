@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Garbage;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -22,8 +23,8 @@ class GarbageRepository extends ServiceEntityRepository
     // /**
     //  * @return Garbage[] Returns an array of Garbage objects
     //  */
-    
-    public function findByWeek($value)
+
+    public function findByWeek(DateTime $value): mixed
     {
         return $this->createQueryBuilder('g')
             ->andWhere('date_diff(date_add(:val, (6 - weekday(:val)), \'day\'),

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\GarbageRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,11 +30,11 @@ class GarbageController extends AbstractController
     #[Route('/latest', name: 'latest')]
     public function latest(GarbageRepository $garbageRepository): Response
     {
-        $user = $this->getUser();
-        $garbages = $garbageRepository->findByWeek('2022-01-05');
-        dd($garbages);
-        return $this->forward("App\\Controller\\GarbageController::show", [
-            "id" => $garbages->getId(),
+        $date = new \DateTime();
+        $garbages = $garbageRepository->findByWeek($date);
+        
+        return $this->render('garbage/latest.html.twig', [
+            "garbages" => $garbages,
         ]);
     }
 
@@ -41,9 +42,11 @@ class GarbageController extends AbstractController
     public function show(Garbage $garbage): Response
     {
         $user = $this->getUser();
+
         if ($user !== $garbage->getUser()) {
             throw new AccessDeniedException("Vous n'avez pas le droit d'accéder à ces données.");
         }
+
         return $this->render('garbage/show.html.twig', [
             'garbage' => $garbage,
         ]);
