@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Garbage;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use DateTime;
 
 #[Route('/garbage', name: 'garbage_')]
 class GarbageController extends AbstractController
@@ -32,7 +33,7 @@ class GarbageController extends AbstractController
     {
         $date = new \DateTime();
         $garbages = $garbageRepository->findByWeek($date);
-        
+
         return $this->render('garbage/latest.html.twig', [
             "garbages" => $garbages,
         ]);
