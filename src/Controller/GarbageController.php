@@ -31,7 +31,7 @@ class GarbageController extends AbstractController
     #[Route('/latest', name: 'latest')]
     public function latest(GarbageRepository $garbageRepository): Response
     {
-        $date = new \DateTime();
+        $date = new DateTime();
         $garbages = $garbageRepository->findByWeek($date);
 
         return $this->render('garbage/latest.html.twig', [
