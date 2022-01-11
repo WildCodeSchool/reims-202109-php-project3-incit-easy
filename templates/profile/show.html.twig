@@ -5,7 +5,7 @@
     <div class="profile-info">
         <div class="profile-head">
             <h2>Profile</h2>
-            <a class="link" href={{ path('app_logout') }}><i class="fas fa-cog"></i></a>
+            <a class="link" href={{ path('app_logout') }}><i class="fas fa-sign-out-alt"></i></a>
         </div>
         {{ render(controller('App\\Controller\\UserController::show', {user: user})) }}
     </div>
