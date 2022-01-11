@@ -38,6 +38,8 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Post envoyé !');
+
             return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
         }
 

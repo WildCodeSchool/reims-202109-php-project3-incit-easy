@@ -34,14 +34,25 @@
                 color: white;
             }
 
-            input {
-                margin-bottom: 1rem;
+            form {
+
                 width: 100%;
-                padding: 2rem;
-                background-color: rgb(117, 221, 172);
-                border: none;
-                border-radius: 25px;
+
+                textarea {
+                    margin-bottom: 1rem;
+                    padding: 0.1rem;
+                    font-size: 1.4rem;
+                    background-color: rgb(117, 221, 172);
+                    border: none;
+                    border-radius: 10px;
+                    width: 100%;
+                    resize: vertical;
+                    height: 100px;
+                    max-height: 300px;
+                    min-height: 100px;
+                }
             }
+           
 
             button {
                 margin-bottom: 1rem;
@@ -71,6 +82,7 @@
                 background-color: white;
                 color: $primary-color;
                 padding: 0.5rem;
+                overflow: scroll;
             }
         }
     }
@@ -94,6 +106,12 @@
             flex-direction: row;
             .author {
                 color: white;
+                margin-bottom: 0.5rem;
+                flex-grow: 3;
+            }
+
+            .current-author {
+                color: rgb(157, 224, 69);
                 margin-bottom: 0.5rem;
                 flex-grow: 3;
             }

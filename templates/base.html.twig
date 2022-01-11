@@ -19,6 +19,14 @@
 	<body>
 		<header></header>
 		<main>
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+
 		{% block body %}{% endblock %}
 		</main>
 		<footer>
