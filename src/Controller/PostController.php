@@ -30,8 +30,8 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $date = new DateTimeImmutable();
-            $user = (User)($this->getUser());
-            $post->setCreatedAt($date)->setUser($user);
+            $user = $this->getUser();
+            $post->setCreatedAt($date)->setUser((User)($user));
             $entityManager->persist($post);
             $entityManager->flush();
 
