@@ -3,53 +3,29 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
-    {% set total_garbage = garbage.nonRecycledWaste + garbage.recycledWaste %}
-    {% set total_objectif = 7 * garbage.user.nbHousehold %}
-    <section class="garbage-dashboard">
-        <div class="garbage-total-container">
-            <h1>Votre levée du {{ garbage.createdAt|date("m/d/Y") }}</h1>
-            <div class="progress">
-                <div class="overflow">
-                    <div class="shift-caliber">
-                        <div id="bar" class="bar">
-                        </div>
-                    </div>
-                    <p class="current-garbage"><span id="total-garbage">{{ total_garbage }}</span>kg</p>
-                    <p class="max-garbage">7kg <!-- x(times) nbUser --></p>
-                </div>
-                <span id="bar-percent" hidden>{{ (total_garbage / total_objectif) * 100 }}</span>
-            </div>
-            <div class='warning-container'>
-                <div class='first-warning warning' id="warning"></div>
-                <div class='second-warning warning' id="warning"></div>
-                <div class='final-warning warning' id="warning"></div>
-            </div>
-            {% if total_garbage < total_objectif %}
-                <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
-            {% elseif total_garbage == total_objectif %}
-                <p class="commentary">Bravo ! Vous avez respecté votre objectif !</p>
-            {% else %}
-                <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
-            {% endif %}
+    <section class="garbage-dashboard garbage-total-container">
+        <h1>Votre levée du {{ garbage.createdAt|date("m/d/Y") }}</h1>
+        <div class="garbage-type-weight">
+        {% if garbage.type == 'recycled' %}
+            <p>Déchets recyclables</p>
+            <i class="fas fa-recycle"></i>
+        {% else %}
+            <p>Déchets ménagers</p>
+            <i class="fas fa-trash-alt"></i>
+        {% endif %}
+            <p class="garbage-weight">
+                {{ garbage.weight }}kg
+            </p>
         </div>
-        <div class='garbage-detail-container'>
-            <h2>Ce que vous avez jeté</h2>
-            <div class="garbage-details">
-                <div class="black">
-                    <p class="fas fa-trash icon"></p>
-                    <p><span>{{ garbage.nonRecycledWaste }}kg</span></p>
-                    <div class="line-progress-container">
-                        <div class="line-progress-bar non-recycled" style="width:{{ (garbage.nonRecycledWaste / total_garbage) * 100 }}%"></div>
-                    </div>
-                </div>
-                <div class="yellow">
-                    <p class="fas fa-recycle icon"></p>
-                    <p><span>{{ garbage.recycledWaste }}kg</span></p>
-                    <div class="line-progress-container">
-                        <div class="line-progress-bar recycled" style="width:{{ (garbage.recycledWaste / total_garbage) * 100 }}%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </section>
+    <section class="advice-container">
+        <h1>Conseils</h1>
+        {% if garbage.type == 'recycled' %}
+            <p>random advice zldkénazdkaz azdlknazdkn azdlkanzd azldknazd aojazbdlak doanzndla oaz dlakzdnakzd lakzd lakzdnoazdakjzd al</p>
+            <p>random advice zldkénazdkaz azdlknazdkn azdlkanzd azldknazd aojazbdlak doanzndla oaz dlakzdnakzd lakzd lakzdnoazdakjzd al</p>
+        {% else %}
+            <p>random advice zldknaknalzda lazkdnazd azkdnaz alzkdna alzkdn alzkdn alzkdn lazdlaz adlakzndnalzd </p>
+            <p>random advice zldknaknalzda lazkdnazd azkdnaz alzkdna alzkdn alzkdn alzkdn lazdlaz adlakzndnalzd </p>
+        {% endif %}
     </section>
 {% endblock %}
