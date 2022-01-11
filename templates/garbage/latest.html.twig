@@ -18,7 +18,7 @@
         {% set nonrecycled_weight = nonrecycled_weight + garbage.weight %}
     {% endfor %}
 
-    {% set total_objectif = 7 * garbages|first.user.nbHousehold %}
+    {% set total_objectif = 5.6 * garbages|first.user.nbHousehold %}
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Vos déchets cette semaine</h1>
@@ -29,14 +29,16 @@
                         </div>
                     </div>
                     <p class="current-garbage">{{ total_weight }}kg</p>
-                    <p class="max-garbage">{{ total_objectif }}kg <!-- x(times) nbUser --></p>
                 </div>
                 <span id="bar-percent" hidden>{{ (total_weight / total_objectif) * 100 }}</span>
             </div>
-            <div class='warning-container'>
-                <div class='first-warning warning'></div>
-                <div class='second-warning warning'></div>
-                <div class='final-warning warning'></div>
+            <div class="sub-progress">
+                <div class='warning-container'>
+                    <div class='first-warning warning'></div>
+                    <div class='second-warning warning'></div>
+                    <div class='final-warning warning'></div>
+                </div>
+                <p class="max-garbage">{{ total_objectif|round }}kg</p>
             </div>
             {% if total_weight < total_objectif %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
