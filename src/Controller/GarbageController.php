@@ -31,6 +31,11 @@ class GarbageController extends AbstractController
     #[Route('/latest', name: 'latest')]
     public function latest(GarbageRepository $garbageRepository): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute("login");
+        }
+
         $date = new DateTime();
         $garbages = $garbageRepository->findByWeek($date);
 
