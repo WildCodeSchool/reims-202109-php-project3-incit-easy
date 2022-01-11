@@ -36,7 +36,7 @@ class GarbageController extends AbstractController
             return $this->redirectToRoute("login");
         }
 
-        $date = new DateTime("8-11-2022");
+        $date = new DateTime();
         $garbages = $garbageRepository->findByWeek($date);
 
         return $this->render('garbage/latest.html.twig', [
