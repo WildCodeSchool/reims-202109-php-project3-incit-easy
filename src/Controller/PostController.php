@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/post')]
 class PostController extends AbstractController
@@ -30,7 +31,10 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $date = new DateTimeImmutable();
-            $post->setCreatedAt($date)->setUser($this->getUser());
+
+            /** @var \App\Entity\User $user */
+            $user = $this->getUser();
+            $post->setCreatedAt($date)->setUser($user);
             $entityManager->persist($post);
             $entityManager->flush();
 
