@@ -34,27 +34,31 @@
         transform: rotate(0deg);
         border-top-color: #eee;
         border-left-color: #eee;
+        border-bottom-color: var(--final-color-two);
+        border-right-color: var(--final-color-two);
     }
 
     50% {
         transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
+        border-bottom-color: var(--final-color-two);
+        border-right-color: var(--final-color-two);
     }
 
     51% {
         border-top-color: var(--final-color);
         border-left-color: var(--final-color);
-        border-bottom-color: var(--final-color);
-        border-right-color: var(--final-color);
+        border-bottom-color: var(--final-color-two);
+        border-right-color: var(--final-color-two);
     }
 
     100% {
-        transform: rotate(var(--rotation, 0deg));
+        transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: var(--final-color);
         border-left-color: var(--final-color);
-        border-bottom-color: var(--final-color);
-        border-right-color: var(--final-color);
+        border-bottom-color: var(--final-color-two);
+        border-right-color: var(--final-color-two);
     }
 }
 
