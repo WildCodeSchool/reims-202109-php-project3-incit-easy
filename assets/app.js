@@ -14,6 +14,7 @@ const percent = document.getElementById('bar-percent');
 
 const rotation = parseInt(Math.min((percent.innerHTML * 1.8), 360), 10);
 
+const warningContainer = document.querySelector('.warning-container');
 const firstWarning = document.querySelector('.first-warning');
 const secondWarning = document.querySelector('.second-warning');
 const finalWarning = document.querySelector('.final-warning');
@@ -22,23 +23,28 @@ const progressBar = document.querySelector('.bar');
 document.documentElement.style.setProperty('--rotation', `${rotation}deg`);
 
 if (percent.innerHTML <= 100) {
-    document.documentElement.style.setProperty('--final-color', '$tertiary-color');
-} else if (percent.innerHTML > 100 && percent.innerHTML < 133) {
-    firstWarning.style.backgroundColor = 'yellow';
+    warningContainer.style.cssText += 'display: none;';
+    document.documentElement.style.setProperty('--final-color', '#eee');
+    document.documentElement.style.setProperty('--final-color-two', '#2bad93');
+} else if (percent.innerHTML > 100 && percent.innerHTML < 113) {
+    firstWarning.style.backgroundColor = '#FCFF4C';
     firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
-    document.documentElement.style.setProperty('--final-color', 'yellow');
-} else if (percent.innerHTML > 133 && percent.innerHTML < 166) {
-    firstWarning.style.backgroundColor = 'yellow';
-    secondWarning.style.backgroundColor = 'orange';
+    document.documentElement.style.setProperty('--final-color', '#FCFF4C');
+    document.documentElement.style.setProperty('--final-color-two', '#FCFF4C');
+} else if (percent.innerHTML > 113 && percent.innerHTML < 136) {
+    firstWarning.style.backgroundColor = '#FCFF4C';
+    secondWarning.style.backgroundColor = '#ffb625';
     firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
     secondWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 2s;';
-    document.documentElement.style.setProperty('--final-color', 'orange');
+    document.documentElement.style.setProperty('--final-color', '#ffb625');
+    document.documentElement.style.setProperty('--final-color-two', '#ffb625');
 } else {
-    firstWarning.style.backgroundColor = 'yellow';
-    secondWarning.style.backgroundColor = 'orange';
-    finalWarning.style.backgroundColor = 'red';
+    firstWarning.style.backgroundColor = '#FCFF4C';
+    secondWarning.style.backgroundColor = '#ffb625';
+    finalWarning.style.backgroundColor = '#ff4949';
     firstWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 1.5s;';
     secondWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 2s;';
     finalWarning.style.cssText += 'animation: pop 1s normal forwards; animation-delay: 3s;';
-    document.documentElement.style.setProperty('--final-color', 'red');
+    document.documentElement.style.setProperty('--final-color', '#ff4949');
+    document.documentElement.style.setProperty('--final-color-two', '#ff4949');
 }
