@@ -6,14 +6,12 @@
     {% for garbage in garbages|slice(0, limit) %}
         <li>
             <a href="{{ path("garbage_show", {id: garbage.getId}) }}">
-                {{ garbage.getCreatedAt|date("m/d/Y") }} -
-                {{ garbage.weight }} kg -
-                {% if garbage.weight < 7 %}
-                <i class="fas fa-smile-beam"></i>
-                {% elseif garbage.weight < 12 %}
-                <i class="fas fa-meh"></i>
+                <span>{{ garbage.getCreatedAt|date("m/d/Y") }}</span>
+                <span>{{ garbage.weight }} kg</span>
+                {% if garbage.type == 'recycled' %}
+                <i class="fas fa-recycle"></i>
                 {% else %}
-                <i class="fas fa-frown"></i>
+                <i class="fas fa-trash-alt"></i>
                 {% endif %}
             </a>
         </li>
