@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Service\UserManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,11 +28,9 @@ class PostController extends AbstractController
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $date = new DateTimeImmutable();
-            $user = $this->getUser();
-            $post->setCreatedAt($date)->setUser((User)($user));
+            $post->setCreatedAt($date)->setUser($this->getUser());
             $entityManager->persist($post);
             $entityManager->flush();
 
