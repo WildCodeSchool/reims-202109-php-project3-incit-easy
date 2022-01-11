@@ -4,21 +4,29 @@
 
 {% block body %}
     {% set total_weight = 0 %}
-    {% for garbage in garbages %}
-        {% set total_weight = total_weight + garbage.weight %}
-    {% endfor %}
+    {% if garbages|length != 0 %}
+        {% for garbage in garbages %}
+            {% set total_weight = total_weight + garbage.weight %}
+        {% endfor %}
 
-    {% set recycled_weight = 0 %}
-    {% for garbage in garbages|filter(garbage => garbage.type == 'recycled') %}
-        {% set recycled_weight = recycled_weight + garbage.weight %}
-    {% endfor %}
+        {% set recycled_weight = 0 %}
+        {% for garbage in garbages|filter(garbage => garbage.type == 'recycled') %}
+            {% set recycled_weight = recycled_weight + garbage.weight %}
+        {% endfor %}
 
-    {% set nonrecycled_weight = 0 %}
-    {% for garbage in garbages|filter(garbage => garbage.type == 'nonRecycled') %}
-        {% set nonrecycled_weight = nonrecycled_weight + garbage.weight %}
-    {% endfor %}
+        {% set nonrecycled_weight = 0 %}
+        {% for garbage in garbages|filter(garbage => garbage.type == 'nonRecycled') %}
+            {% set nonrecycled_weight = nonrecycled_weight + garbage.weight %}
+        {% endfor %}
 
-    {% set total_objectif = 5.6 * garbages|first.user.nbHousehold %}
+        {% set total_objectif = 5.6 * garbages|first.user.nbHousehold %}
+    {% else %}
+            {% set total_objectif = 5.6 * app.user.nbHousehold %}
+            {% set recycled_weight = 0 %}
+            {% set nonrecycled_weight = 0 %}
+            {% set total_weight = 0.1 %}
+
+    {% endif %}
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Vos déchets cette semaine</h1>
@@ -28,9 +36,18 @@
                         <div id="bar" class="bar">
                         </div>
                     </div>
-                    <p class="current-garbage">{{ total_weight }}kg</p>
+                    {% if garbages|length != 0 %}
+                        <p class="current-garbage">{{ total_weight }}kg</p>
+                    {% else %}
+                        <p class="current-garbage">0kg</p>
+                    {% endif %}
                 </div>
-                <span id="bar-percent" hidden>{{ (total_weight / total_objectif) * 100 }}</span>
+                {% if garbages|length != 0 %}
+                    <span id="bar-percent" hidden>{{ (total_weight / total_objectif) * 100 }}</span>
+                {% else %}
+                    <span id="bar-percent" hidden>0</span>
+                {% endif %}
+
             </div>
             <div class="sub-progress">
                 <div class='warning-container'>
@@ -48,24 +65,31 @@
                 <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
             {% endif %}
         </div>
-        <div class='garbage-detail-container'>
-            <h2>Ce que vous avez jeté</h2>
-            <div class="garbage-details">
-                <div class="black">
-                    <p class="fas fa-trash icon"></p>
-                    <p><span>{{ nonrecycled_weight }}kg</span></p>
-                    <div class="line-progress-container">
-                        <div class="line-progress-bar non-recycled" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
+        {% if garbages|length != 0 %}
+            <div class='garbage-detail-container'>
+                <h2>Ce que vous avez jeté</h2>
+                <div class="garbage-details">
+                    <div class="black">
+                        <p class="fas fa-trash icon"></p>
+                        <p><span>{{ nonrecycled_weight }}kg</span></p>
+                        <div class="line-progress-container">
+                            <div class="line-progress-bar non-recycled" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="yellow">
-                    <p class="fas fa-recycle icon"></p>
-                    <p><span>{{ recycled_weight }}kg</span></p>
-                    <div class="line-progress-container">
-                        <div class="line-progress-bar recycled" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
+                    <div class="yellow">
+                        <p class="fas fa-recycle icon"></p>
+                        <p><span>{{ recycled_weight }}kg</span></p>
+                        <div class="line-progress-container">
+                            <div class="line-progress-bar recycled" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="no-garbage">
+                <p>Pas de levée enregistrée.</p>
+                <p class="sub">N'hésitez pas à jeter un oeil aux activités de votre communauté !</p>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
