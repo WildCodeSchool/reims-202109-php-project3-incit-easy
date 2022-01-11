@@ -40,8 +40,6 @@
         transform: rotate(min(var(--rotation, 0deg), 180deg));
         border-top-color: #eee;
         border-left-color: #eee;
-        border-bottom-color: var(--final-color);
-        border-right-color: var(--final-color);
     }
 
     51% {

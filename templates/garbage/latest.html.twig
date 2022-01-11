@@ -53,14 +53,14 @@
                     <p class="fas fa-trash icon"></p>
                     <p><span>{{ nonrecycled_weight }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
+                        <div class="line-progress-bar non-recycled" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
                     </div>
                 </div>
                 <div class="yellow">
                     <p class="fas fa-recycle icon"></p>
                     <p><span>{{ recycled_weight }}kg</span></p>
                     <div class="line-progress-container">
-                        <div class="line-progress-bar" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
+                        <div class="line-progress-bar recycled" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
                     </div>
                 </div>
             </div>
