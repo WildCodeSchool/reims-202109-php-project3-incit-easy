@@ -78,12 +78,18 @@
     color: white;
 }
 
-.max-garbage {
-    position: absolute;
-    right: 10%;
-    bottom: 0;
-    color: white;
-    font-size: 1.5rem;
+.sub-progress {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .max-garbage {
+        position: absolute;
+        left: 80%;
+        color: #eee;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
 }
 
 .warning-container {
@@ -252,6 +258,20 @@
         border-radius: 0.45rem;
         margin-left: 0.1rem;
         opacity: 0;
+    }
+}
+
+.no-garbage {
+    font-size: 1.8rem;
+    color: #eee;
+    margin-top: 3rem;
+    padding: 2.5rem;
+    text-align: center;
+
+    .sub {
+        font-size: 1rem;
+        text-align: left;
+        margin-left: 1rem;
     }
 }
 
