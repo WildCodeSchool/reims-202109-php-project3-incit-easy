@@ -10,6 +10,7 @@ use App\Service\UserManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use DoctrineExtensions\Query\Mysql\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,9 +43,8 @@ class PostController extends AbstractController
 
             return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
             'postForm' => $form,
         ]);
     }
