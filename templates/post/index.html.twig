@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommunityController!{% endblock %}
+
+{% block body %}
+    <section class='post-wall-container'>
+        
+        <div class='post-wall-head' id="drop-down">
+            <h1>Votre communauté</h1>
+            <div class='post-create'>
+                <h2>Quoi de neuf ?</h2>
+                {% if app.user %}
+                    {{ form_start(postForm, {'attr': {'class': 'form-post'}}) }}
+                    {{ form_row(postForm.message) }}
+                    <button type='submit'>Partager</button>
+                    {{ form_end(postForm) }}
+                {% endif %}
+            </div>
+            <li class="fas fa-chevron-down"></li>
+        </div>
+
+        <div class="del-edit">
+
+            {% for post in posts %}
+
+                    <div class='post-wall'>
+                        <div class="post">
+                            <div class="test">
+                                {% if app.user == post.user %}
+                                    <p class='current-author'><i class="fas fa-user-circle"></i> {{ post.user.username }}</p>
+                                {% else %}
+                                    <p class='author'><i class="fas fa-user-circle"></i> {{ post.user.username }}</p>
+                                {% endif %}
+                                {% if app.user == post.user %}
+                                        {% include "post/_edit_form.html.twig" %}
+                                {% endif %}
+                            </div>
+                            <p class='content'>{{ post.createdAt|date("d/m/Y") }}</p>
+
+                            <p class='content'>{{ post.message }}</p>
+
+                            <div></div>
+                            <p>J'aime</p>
+                            <p>Commenter</p>
+                        </div>
+                    </div>
+
+            {% endfor %}
+            
+        </div>
+
+    </section>
+{% endblock %}

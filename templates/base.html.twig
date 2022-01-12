@@ -19,6 +19,14 @@
 	<body>
 		<header></header>
 		<main>
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+
 		{% block body %}{% endblock %}
 		</main>
 		<footer>
@@ -27,7 +35,7 @@
 			<nav class="nav">
 				<a href="{{ path('garbage_latest') }}"><i class="fas fa-home"></i></a>
 				<a href="{{ path('profile_show', {id: app.user.id}) }}"><i class="fas fa-user"></i></a>
-				<a href="{{ path('community') }}"><i class="fas fa-users"></i></a>
+				<a href="{{ path('post_index') }}"><i class="fas fa-users"></i></a>
 			</nav>
 			{% endif %}
 		{% endblock %}
