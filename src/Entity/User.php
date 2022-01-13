@@ -41,21 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $street;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private string $zipcode;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private string $city;
-
-    /**
      * @ORM\Column(type="string", length=60)
      */
     private string $email;
@@ -79,6 +64,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      */
     private int $nbHousehold;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adress::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Adress $adress;
 
     public function __construct()
     {
@@ -177,42 +168,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function setStreet(string $street): self
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?string
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(string $zipcode): self
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -287,6 +242,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNbHousehold(int $nbHousehold): self
     {
         $this->nbHousehold = $nbHousehold;
+
+        return $this;
+    }
+
+    public function getAdress(): ?Adress
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(?Adress $adress): self
+    {
+        $this->adress = $adress;
 
         return $this;
     }
