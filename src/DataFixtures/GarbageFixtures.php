@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Garbage;
+use App\Service\GarbageManager;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -12,23 +13,29 @@ class GarbageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $number = 500;
-        $today = new DateTimeImmutable();
-        for ($i = 0; $i < $number; $i++) {
+        $garbageManager = new GarbageManager();
+        preg_match_all(
+            "/([a-zA-Z0-9 ]+),([0-9]+\/[0-9]+\/[0-9]+),(recycled|nonRecycled),([0-9]+\.[0-9]+),,/m",
+            $garbageManager->getDataSample(),
+            $matches
+        );
+        for ($i = 0; $i < count($matches[1]); $i++) {
             $garbage = new Garbage();
-            $garbage->setType(rand(0, 1) ? 'recycled' : 'nonRecycled');
-            $garbage->setWeight(rand(1, 6));
-            $garbage->setUser($this->getReference("user_0"));
-            $garbage->setCreatedAt($today->modify("-$i week"));
+            $garbage->setCreatedAt(new DateTimeImmutable($matches[2][$i]));
+            $garbage->setType($matches[3][$i]);
+            $garbage->setWeight($matches[4][$i]);
+            $adress = $this->getReference($matches[1][$i]);
+            if (empty($adress->getUsers())) {
+                $garbage->setAdress($this->getReference($matches[1][$i]));
+            } else {
+                foreach ($adress->getUsers() as $user) {
+                    $garbage->setUser($user);
+                }
+            }
             $manager->persist($garbage);
-        }
-        for ($i = 0; $i < $number; $i++) {
-            $garbage = new Garbage();
-            $garbage->setType(rand(0, 1) ? 'recycled' : 'nonRecycled');
-            $garbage->setWeight(rand(1, 6));
-            $garbage->setUser($this->getReference("user_1"));
-            $garbage->setCreatedAt($today->modify("-$i week"));
-            $manager->persist($garbage);
+            if ($i % 400 === 0) {
+                $manager->flush();
+            }
         }
         $manager->flush();
     }
@@ -36,7 +43,8 @@ class GarbageFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            UserFixtures::class
+            UserFixtures::class,
+            AdressFixtures::class
         ];
     }
 }
