@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('post_edit', {'id': post.id}) }}" onsubmit="return confirm('Are you sure you want to edit this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('edit' ~ post.id) }}">
+    <button class="btn">edit</button>
+</form>

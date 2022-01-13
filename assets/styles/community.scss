@@ -3,6 +3,10 @@
     flex-direction: column;
     text-align: center;
 
+    label {
+        display: none;
+    }
+
     .post-wall-head {
         background-color: $primary-color;
         border-bottom-left-radius: 50% 20%;
@@ -27,19 +31,27 @@
             padding: 0 3rem 0 3rem;
 
             h2 {
-                align-self:flex-start;
-                margin-left: 10vw;
                 color: white;
             }
 
-            input {
-                margin-bottom: 1rem;
+            form {
+
                 width: 100%;
-                padding: 2rem;
-                background-color: rgb(117, 221, 172);
-                border: none;
-                border-radius: 25px;
+
+                textarea {
+                    margin-bottom: 1rem;
+                    padding: 0.8rem;
+                    font-size: 1.4rem;
+                    background-color: rgb(117, 221, 172);
+                    border: none;
+                    border-radius: 10px;
+                    width: 100%;
+                    resize: vertical;
+                    max-height: 15rem;
+                    min-height: 5rem;
+                }
             }
+           
 
             button {
                 margin-bottom: 1rem;
@@ -49,6 +61,17 @@
                 border-radius: 25px;
                 font-size: large;
                 font-weight:bolder;
+            }
+
+            .link {
+                text-decoration: none;
+                font-size: large;
+                border-radius: 25px;
+                border: 1px solid black;
+                color: black;
+                background-color: white ;
+                font-weight:bolder;
+                padding: 0.3rem 1rem 0.3rem 1rem;
             }
         }
     }
@@ -63,17 +86,45 @@
             background-color: $primary-color;
             border-radius: 25px;
 
-            .author {
-                color: white;
-                margin-bottom: 0.5rem;
-            }
-
             .content {
                 display: block;
                 border-radius: 12px;
                 background-color: white;
                 color: $primary-color;
                 padding: 0.5rem;
+                overflow: scroll;
+            }
+        }
+    }
+
+    .del-edit {
+        
+        button {
+            display: flex;
+            margin-bottom: 1rem;
+            padding: 0.3rem 1rem 0.3rem 1rem;
+            height: 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: large;
+            font-weight:bolder;
+            align-items: center;
+        }
+
+        .test {
+            display: flex;
+            flex-direction: row;
+
+            .author {
+                color: white;
+                margin-bottom: 0.5rem;
+                flex-grow: 3;
+            }
+
+            .current-author {
+                color: rgb(157, 224, 69);
+                margin-bottom: 0.5rem;
+                flex-grow: 3;
             }
         }
     }
