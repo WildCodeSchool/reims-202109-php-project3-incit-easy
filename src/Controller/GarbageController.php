@@ -31,13 +31,14 @@ class GarbageController extends AbstractController
     #[Route('/latest', name: 'latest')]
     public function latest(GarbageRepository $garbageRepository): Response
     {
+        /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        if (!$user) {
+        if ($user == null) {
             return $this->redirectToRoute("login");
         }
 
         $date = new DateTime();
-        $garbages = $garbageRepository->findByWeek($date);
+        $garbages = $garbageRepository->findByWeek($date, $user);
 
         return $this->render('garbage/latest.html.twig', [
             "garbages" => $garbages,

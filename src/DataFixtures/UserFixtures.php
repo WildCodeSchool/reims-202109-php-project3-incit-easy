@@ -22,9 +22,6 @@ class UserFixtures extends Fixture
         $userOne->setUsername('Romain38');
         $userOne->setEmail('userone@mail.com');
         $userOne->setRoles(['ROLE_USER']);
-        $userOne->setStreet('20 rue de babel');
-        $userOne->setZipcode('51100');
-        $userOne->setCity('Reims');
         $userOne->setNbHousehold('4');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $userOne,
@@ -32,6 +29,7 @@ class UserFixtures extends Fixture
         );
 
         $userOne->setPassword($hashedPassword);
+        $userOne->setAdress($this->getReference("6 AVENUE DE LAON 51100 REIMS"));
         $manager->persist($userOne);
         $this->addReference("user_0", $userOne);
 
@@ -40,9 +38,6 @@ class UserFixtures extends Fixture
         $userTwo->setUsername('Michel51');
         $userTwo->setEmail('userTwo@mail.com');
         $userTwo->setRoles(['ROLE_USER']);
-        $userTwo->setStreet('45 rue de richard');
-        $userTwo->setZipcode('51100');
-        $userTwo->setCity('Reims');
         $userTwo->setNbHousehold('4');
         $hashedPassword = $this->passwordHasher->hashPassword(
             $userTwo,
@@ -50,11 +45,19 @@ class UserFixtures extends Fixture
         );
 
         $userTwo->setPassword($hashedPassword);
+        $userTwo->setAdress($this->getReference("37 RUE BOUDET 51100 REIMS"));
         $manager->persist($userTwo);
         $this->addReference("user_1", $userTwo);
 
 
         // Sauvegarde des 2 nouveaux utilisateurs :
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            AdressFixtures::class
+        ];
     }
 }

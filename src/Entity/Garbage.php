@@ -38,6 +38,12 @@ class Garbage
      */
     private float $weight;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Adress::class, inversedBy="garbages")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private ?Adress $adress;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable("now");
@@ -104,6 +110,18 @@ class Garbage
     public function setWeight(float $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getAdress(): ?Adress
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(?Adress $adress): self
+    {
+        $this->adress = $adress;
 
         return $this;
     }
