@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Service\UserManager;
 use DateTimeImmutable;
@@ -47,6 +50,23 @@ class PostController extends AbstractController
             'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
             'postForm' => $form,
         ]);
+    }
+
+    #[Route('/{id}/comment', name: 'post_comment_new', methods: ['POST'])]
+    public function addComment(Post $post, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $comment = new Comment();
+        $comment->setMessage((string)$request->request->get('message'));
+
+        $date = new DateTimeImmutable();
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $comment->setCreatedAt($date)->setUser($user)->setPost($post);
+        $entityManager->persist($comment);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('post_index');
     }
 
     #[Route('/{id}', name: 'post_show', methods: ['GET'])]

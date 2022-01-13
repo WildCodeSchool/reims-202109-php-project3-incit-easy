@@ -34,13 +34,22 @@
                                         {% include "post/_edit_form.html.twig" %}
                                 {% endif %}
                             </div>
-                            <p class='content'>{{ post.createdAt|date("d/m/Y") }}</p>
+                            <p>{{ post.createdAt|date("d/m/Y") }}</p>
 
                             <p class='content'>{{ post.message }}</p>
 
-                            <div></div>
                             <p>J'aime</p>
-                            <p>Commenter</p>
+                            <details>
+                                <summary>Commentaire</summary>
+                                <form method="post" action="{{ path('post_comment_new', {id: post.id}) }}">
+                                    <textarea name="message"></textarea>
+                                    <button type='submit'>Commenter</button>
+                                        {% for comment in post.comments %}
+                                            <p class='author'><i class="fas fa-user-circle"></i> {{ comment.user.username }}</p>
+                                            <div>{{ comment.message }}</div>
+                                        {% endfor %}
+                                </form>
+                            </details>
                         </div>
                     </div>
             {% endfor %}
