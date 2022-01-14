@@ -45,10 +45,9 @@
                                             {% for comment in post.comments %}
                                                 <div class="author-comment">
                                                     <p class='author'><i class="fas fa-user-circle"></i> {{ comment.user.username }}</p>
-                                                    <div class="message-comment"> 
+                                                    <div class="message-comment">
                                                         {{ comment.message }}</div>
                                                 </div>
-                                                
                                             {% endfor %}
                                     </form>
                                 </details>
