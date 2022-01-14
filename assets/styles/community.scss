@@ -128,4 +128,39 @@
             }
         }
     }
+
+    .like-comment {
+        display: flex;
+        justify-content: space-between;
+
+        .comment {
+            
+            width: 90%;
+        }
+
+        textarea {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            font-size: 1.4rem;
+            background-color: rgb(117, 221, 172);
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            resize: vertical;
+            max-height: 15rem;
+            min-height: 2rem;
+        }
+
+        .author-comment {
+            margin-top: 1rem;
+        }
+
+        .message-comment {
+            border: 1px solid white;
+            background-color: white;
+            border-radius: 5px;
+            min-height: 2rem;
+        }
+
+    }
 }
