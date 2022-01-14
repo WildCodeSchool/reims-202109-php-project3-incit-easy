@@ -42,13 +42,14 @@
                                     <form method="post" action="{{ path('post_comment_new', {id: post.id}) }}">
                                         <textarea name="message"></textarea>
                                         <button type='submit'>Commenter</button>
-                                            {% for comment in post.comments %}
-                                                <div class="author-comment">
-                                                    <p class='author'><i class="fas fa-user-circle"></i> {{ comment.user.username }}</p>
-                                                    <div class="message-comment">
-                                                        {{ comment.message }}</div>
+                                        {% for comment in post.comments %}
+                                            <div class="author-comment">
+                                                <p class='author'><i class="fas fa-user-circle"></i> {{ comment.user.username }}</p>
+                                                <div class="message-comment">
+                                                    {{ comment.message }}
                                                 </div>
-                                            {% endfor %}
+                                            </div>
+                                        {% endfor %}
                                     </form>
                                 </details>
                                 <i class="fas fa-thumbs-up like"></i>
