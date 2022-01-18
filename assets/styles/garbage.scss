@@ -325,7 +325,8 @@
 
         a {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            margin: 0 1rem;
             align-items: center;
             color: $primary-color;
             text-decoration: none;
