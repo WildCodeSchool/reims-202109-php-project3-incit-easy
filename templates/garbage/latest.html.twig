@@ -3,30 +3,31 @@
 {% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
+    {% set yearly_recycled_data = 0 %}
+    {% set yearly_nonrecycled_data = 0 %}
+
+    {% if yearlyGarbages|length != 0 %}
+        {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'recycled') %}
+            {% set yearly_recycled_data = yearly_recycled_data + garbage.weight %}
+        {% endfor %}
+        {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'nonRecycled') %}
+            {% set yearly_nonrecycled_data = yearly_nonrecycled_data + garbage.weight %}
+        {% endfor %}
+        {% set yearly_recycled_objective = 55 * yearlyGarbages|first.user.nbHousehold %}
+        {% set yearly_nonrecycled_objective = 240 * yearlyGarbages|first.user.nbHousehold %}
+    {% endif %}
+
     {% set total_weight = 0 %}
     {% if garbages|length != 0 %}
         {% for garbage in garbages %}
             {% set total_weight = total_weight + garbage.weight %}
         {% endfor %}
-
-        {% set recycled_weight = 0 %}
-        {% for garbage in garbages|filter(garbage => garbage.type == 'recycled') %}
-            {% set recycled_weight = recycled_weight + garbage.weight %}
-        {% endfor %}
-
-        {% set nonrecycled_weight = 0 %}
-        {% for garbage in garbages|filter(garbage => garbage.type == 'nonRecycled') %}
-            {% set nonrecycled_weight = nonrecycled_weight + garbage.weight %}
-        {% endfor %}
-
         {% set total_objectif = 5.6 * garbages|first.user.nbHousehold %}
     {% else %}
-            {% set total_objectif = 5.6 * app.user.nbHousehold %}
-            {% set recycled_weight = 0 %}
-            {% set nonrecycled_weight = 0 %}
-            {% set total_weight = 0.1 %}
-
+        {% set total_objectif = 5.6 * app.user.nbHousehold %}
+        {% set total_weight = 0.1 %}
     {% endif %}
+
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Vos déchets cette semaine</h1>
@@ -65,30 +66,27 @@
                 <p class="commentary">Dommage, mais avec quelques petits efforts, vous atteindrez l'objectif !</p>
             {% endif %}
         </div>
-        {% if garbages|length != 0 %}
+        {% if yearlyGarbages|length != 0 %}
             <div class='garbage-detail-container'>
-                <h2>Ce que vous avez jeté</h2>
+                <h2>Vos objectifs à l'année</h2>
                 <div class="garbage-details">
+                    <div class="objective">{{ yearly_nonrecycled_objective }}kg</div>
                     <div class="black">
                         <p class="fas fa-trash icon"></p>
-                        <p><span>{{ nonrecycled_weight }}kg</span></p>
+                        <p><span>{{ yearly_nonrecycled_data|round }}kg</span></p>
                         <div class="line-progress-container">
-                            <div class="line-progress-bar non-recycled" style="width:{{ (nonrecycled_weight / total_weight) * 100 }}%"></div>
+                            <div class="line-progress-bar non-recycled" style="width:{{ (yearly_nonrecycled_data / yearly_nonrecycled_objective) * 100 }}%"></div>
                         </div>
                     </div>
+                    <div class="objective">{{ yearly_recycled_objective }}kg</div>
                     <div class="yellow">
                         <p class="fas fa-recycle icon"></p>
-                        <p><span>{{ recycled_weight }}kg</span></p>
+                        <p><span>{{ yearly_recycled_data|round }}kg</span></p>
                         <div class="line-progress-container">
-                            <div class="line-progress-bar recycled" style="width:{{ (recycled_weight / total_weight) * 100 }}%"></div>
+                            <div class="line-progress-bar recycled" style="width:{{ (yearly_recycled_data / yearly_recycled_objective) * 100 }}%"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="no-garbage">
-                <p>Pas de levée enregistrée.</p>
-                <p class="sub">N'hésitez pas à jeter un oeil aux activités de votre communauté !</p>
             </div>
         {% endif %}
     </section>

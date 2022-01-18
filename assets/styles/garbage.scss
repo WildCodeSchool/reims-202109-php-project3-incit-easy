@@ -193,6 +193,17 @@
             font-size: 2rem;
             color: #eee;
         }
+
+        .objective {
+            display: block;
+            position: absolute;
+            width: 4rem;
+            left: 82vw;
+            color: #eee;
+            text-decoration: underline;
+            font-size: 1.3rem;
+            overflow-x: hidden;
+        }
     }
 
     &-details>* {
@@ -204,16 +215,20 @@
 
         p {
             background-color: $secondary-color;
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 5rem;
+            height: 5rem;
             border-radius: 50%;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             z-index: 1;
             margin-left: 1rem;
+        }
+
+        span {
+            font-size: 1.8rem;
         }
     }
 
@@ -231,9 +246,9 @@
 
 .line-progress {
     &-container {
-        height: 1rem;
+        height: 1.5rem;
         background: #eee;
-        border-radius: 0.5rem;
+        border-radius: 25px;
         display: flex;
         align-items: center;
         width: 100%;
@@ -255,7 +270,7 @@
     &-bar {
         height: 90%;
         background: $secondary-color;
-        border-radius: 0.45rem;
+        border-radius: 25px;
         margin-left: 0.1rem;
         opacity: 0;
     }
