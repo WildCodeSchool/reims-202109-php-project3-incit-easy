@@ -1,6 +1,5 @@
 <section class="garbage-list-section">
     <h2>Historique des levées</h2>
-    {% set user = (garbages|last).user %}
     {% if app.user == user %}
     <ul class="garbage-list">
     {% for garbage in garbages|slice(0, limit) %}

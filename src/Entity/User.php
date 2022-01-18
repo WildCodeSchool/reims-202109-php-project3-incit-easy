@@ -52,6 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Garbage::class, mappedBy="user")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private Collection $garbages;
 
