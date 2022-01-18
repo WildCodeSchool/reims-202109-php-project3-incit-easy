@@ -111,17 +111,13 @@ class PostController extends AbstractController
         return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/like', name: 'post_like', methods: ['GET','POST'])]
+    #[Route('/{id}/like', name: 'post_like', methods: ['GET'])]
     public function like(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        if ($user !== $post->getUser()) {
-            // return $this->json([
-            //     'code' => 403,
-            //     'Message' => 'Unauthorized'
-            // ], 403);
-            return $this->redirectToRoute('post_index');
+        if ($user == null) {
+            return $this->redirectToRoute('login');
         }
 
         if ($post->isLikedByUser($user)) {
@@ -132,29 +128,55 @@ class PostController extends AbstractController
 
             if ($like != null) {
                 $manager->remove($like);
-                $manager->flush();
             }
+        } else {
+            $like = new Like();
+            $like->setPost($post)->setUser($user);
 
-            // return $this->json([
-            //     'code' => 200,
-            //     'message' => 'Like supprimé !',
-            //     'likes' => $likeRepository->count(['post' => $post])
-            // ], 200);
-            return $this->redirectToRoute('post_index');
+            $manager->persist($like);
         }
 
-        $like = new Like();
-        $like->setPost($post)->setUser($user);
-
-        $manager->persist($like);
         $manager->flush();
 
-        // return $this->json([
-        //     'code' => 200,
-        //     'message' => 'Tout fonctionne',
-        //     'likes' => $likeRepository->count(['post' => $post])
-        // ], 200);
-
         return $this->redirectToRoute('post_index');
+    }
+
+    #[Route('/{id}/like', name: 'post_like', methods: ['POST'])]
+    public function likeUsingAPI(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
+    {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if ($user == null) {
+            return $this->json([
+                'Message' => 'Unauthorized'
+            ], 403);
+        }
+
+        if ($post->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy([
+                'post' => $post,
+                'user' => $user
+            ]);
+
+            if ($like != null) {
+                $manager->remove($like);
+            }
+
+            $message = 'Like supprimé !';
+        } else {
+            $like = new Like();
+            $like->setPost($post)->setUser($user);
+
+            $manager->persist($like);
+
+            $message = 'Tout fonctionne !';
+        }
+
+        $manager->flush();
+
+        return $this->json([
+            'message' => $message,
+            'likes' => $likeRepository->count(['post' => $post])
+        ], 200);
     }
 }
