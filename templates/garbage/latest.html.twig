@@ -5,8 +5,6 @@
 {% block body %}
     {% set yearly_recycled_data = 0 %}
     {% set yearly_nonrecycled_data = 0 %}
-    {% set yearly_recycled_objective = 55 %}
-    {% set yearly_nonrecycled_objective = 240 %}
 
     {% if yearlyGarbages|length != 0 %}
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'recycled') %}
@@ -15,6 +13,8 @@
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'nonRecycled') %}
             {% set yearly_nonrecycled_data = yearly_nonrecycled_data + garbage.weight %}
         {% endfor %}
+        {% set yearly_recycled_objective = 55 * yearlyGarbages|first.user.nbHousehold %}
+        {% set yearly_nonrecycled_objective = 240 * yearlyGarbages|first.user.nbHousehold %}
     {% endif %}
 
     {% set total_weight = 0 %}
@@ -68,18 +68,20 @@
         </div>
         {% if yearlyGarbages|length != 0 %}
             <div class='garbage-detail-container'>
-                <h2>Ce que vous avez jeté</h2>
+                <h2>Vos objectifs à l'année</h2>
                 <div class="garbage-details">
+                    <div class="objective">{{ yearly_nonrecycled_objective }}kg</div>
                     <div class="black">
                         <p class="fas fa-trash icon"></p>
-                        <p><span>{{ yearly_nonrecycled_data }}kg</span></p>
+                        <p><span>{{ yearly_nonrecycled_data|round }}kg</span></p>
                         <div class="line-progress-container">
                             <div class="line-progress-bar non-recycled" style="width:{{ (yearly_nonrecycled_data / yearly_nonrecycled_objective) * 100 }}%"></div>
                         </div>
                     </div>
+                    <div class="objective">{{ yearly_recycled_objective }}kg</div>
                     <div class="yellow">
                         <p class="fas fa-recycle icon"></p>
-                        <p><span>{{ yearly_recycled_data }}kg</span></p>
+                        <p><span>{{ yearly_recycled_data|round }}kg</span></p>
                         <div class="line-progress-container">
                             <div class="line-progress-bar recycled" style="width:{{ (yearly_recycled_data / yearly_recycled_objective) * 100 }}%"></div>
                         </div>
