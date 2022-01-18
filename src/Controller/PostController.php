@@ -19,8 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use App\Entity\Like;
+use App\Repository\LikeRepository;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 #[Route('/post')]
+
 class PostController extends AbstractController
 {
     #[Route('/', name: 'post_index', methods: ['GET', 'POST'])]
@@ -104,5 +109,74 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/like', name: 'post_like', methods: ['GET'])]
+    public function like(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
+    {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if ($user == null) {
+            return $this->redirectToRoute('login');
+        }
+
+        if ($post->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy([
+                'post' => $post,
+                'user' => $user
+            ]);
+
+            if ($like != null) {
+                $manager->remove($like);
+            }
+        } else {
+            $like = new Like();
+            $like->setPost($post)->setUser($user);
+
+            $manager->persist($like);
+        }
+
+        $manager->flush();
+
+        return $this->redirectToRoute('post_index');
+    }
+
+    #[Route('/{id}/like', name: 'post_like', methods: ['POST'])]
+    public function likeUsingAPI(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
+    {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if ($user == null) {
+            return $this->json([
+                'Message' => 'Unauthorized'
+            ], 403);
+        }
+
+        if ($post->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy([
+                'post' => $post,
+                'user' => $user
+            ]);
+
+            if ($like != null) {
+                $manager->remove($like);
+            }
+
+            $message = 'Like supprimé !';
+        } else {
+            $like = new Like();
+            $like->setPost($post)->setUser($user);
+
+            $manager->persist($like);
+
+            $message = 'Tout fonctionne !';
+        }
+
+        $manager->flush();
+
+        return $this->json([
+            'message' => $message,
+            'likes' => $likeRepository->count(['post' => $post])
+        ], 200);
     }
 }
