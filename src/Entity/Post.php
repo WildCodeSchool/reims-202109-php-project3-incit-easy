@@ -44,7 +44,7 @@ class Post
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="post")
      */
-    private $likes;
+    private Collection $likes;
 
     public function __construct()
     {

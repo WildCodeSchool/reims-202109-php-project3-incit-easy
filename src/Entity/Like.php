@@ -16,17 +16,17 @@ class Like
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="likes")
      */
-    private $post;
+    private ?Post $post;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes")
      */
-    private $user;
+    private ?User $user;
 
     public function getId(): ?int
     {
@@ -53,6 +53,18 @@ class Like
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
 
         return $this;
     }

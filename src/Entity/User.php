@@ -84,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="user")
      */
-    private $likes;
+    private Collection $likes;
 
     public function __construct()
     {
