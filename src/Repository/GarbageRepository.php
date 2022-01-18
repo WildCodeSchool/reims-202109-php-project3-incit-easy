@@ -38,6 +38,18 @@ class GarbageRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByYear(DateTime $value, User $user): mixed
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('SUBSTRING(g.createdAt, 1, 4) = SUBSTRING(:val, 1, 4)')
+            ->andWhere('g.user = :user')
+            ->setParameter('val', $value)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Garbage
     {

@@ -39,9 +39,11 @@ class GarbageController extends AbstractController
 
         $date = new DateTime();
         $garbages = $garbageRepository->findByWeek($date, $user);
+        $yearlyGarbages = $garbageRepository->findByYear($date, $user);
 
         return $this->render('garbage/latest.html.twig', [
             "garbages" => $garbages,
+            "yearlyGarbages" => $yearlyGarbages
         ]);
     }
 
