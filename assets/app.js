@@ -6,6 +6,7 @@
  */
 
 // start the Stimulus application
+import axios from 'axios';
 import './bootstrap';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
@@ -48,3 +49,25 @@ if (percent.innerHTML <= 100) {
     document.documentElement.style.setProperty('--final-color', '#ff4949');
     document.documentElement.style.setProperty('--final-color-two', '#ff4949');
 }
+
+const LIKE_ICON = 'far fa-thumbs-up';
+const UNLIKE_ICON = 'fas fa-thumbs-up';
+Array.from(document.querySelectorAll('a.js-like')).forEach((link) => {
+    async function onClickLink(event) {
+        event.preventDefault();
+        const url = this.href;
+        const icone = this.querySelector('i');
+        const count = this.querySelector('span.js-likes');
+        try {
+            const result = await axios.post(url);
+            const { data } = result;
+            icone.className = icone.className === LIKE_ICON ? UNLIKE_ICON : LIKE_ICON;
+            count.textContent = data.likes;
+        } catch (error) {
+            if (error.response.status === 403) {
+                window.location = '/login';
+            }
+        }
+    }
+    link.addEventListener('click', onClickLink);
+});
