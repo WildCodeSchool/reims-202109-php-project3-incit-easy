@@ -38,12 +38,12 @@ class Post
     private ?User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", cascade={"remove"})
      */
     private Collection $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="post", cascade={"remove"})
      */
     private Collection $likes;
 

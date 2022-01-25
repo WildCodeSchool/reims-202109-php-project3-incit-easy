@@ -24,16 +24,18 @@
                     <div class='post-wall'>
                         <div class="post">
                             <div class="test">
+                                <div>
                                 {% if app.user == post.user %}
                                     <p class='current-author'><i class="fas fa-user-circle"></i> {{ post.user.username }}</p>
                                 {% else %}
                                     <p class='author'><i class="fas fa-user-circle"></i> {{ post.user.username }}</p>
                                 {% endif %}
+                                <p class="date">{{ post.createdAt|date("d/m/Y") }}</p>
+                            </div>
                                 {% if app.user == post.user %}
                                         {% include "post/_edit_form.html.twig" %}
                                 {% endif %}
                             </div>
-                            <p>{{ post.createdAt|date("d/m/Y") }}</p>
 
                             <p class='content'>{{ post.message }}</p>
                             <div class="like-comment">
@@ -54,12 +56,13 @@
                                 </details>
                                 <a href="{{ path('post_like', {'id': post.id}) }}" class="js-like">
                                     {% if app.user and post.isLikedByUser(app.user) %}
-                                        <i class="fas fa-thumbs-up"></i>
+                                            <i class="fas fa-heart"></i>
+                                            <span class="js-likes">{{ post.likes|length }}</span>
                                     {% else %}
-                                        <i class="far fa-thumbs-up"></i>
+                                            <i class="far fa-heart"></i>
+                                            <span class="js-likes">{{ post.likes|length }}</span>
                                     {% endif %}
-                                        <span class="js-likes">{{ post.likes|length }}</span>
-                                        <span class="js-label">J'aime</span>
+                                        <span class="js-label"></span>
                                 </a>
                             </div>
                         </div>

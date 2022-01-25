@@ -52,8 +52,8 @@ if (percent != null) {
     }
 }
 
-const LIKE_ICON = 'far fa-thumbs-up';
-const UNLIKE_ICON = 'fas fa-thumbs-up';
+const LIKE_ICON = 'far fa-heart';
+const UNLIKE_ICON = 'fas fa-heart';
 Array.from(document.querySelectorAll('a.js-like')).forEach((link) => {
     async function onClickLink(event) {
         event.preventDefault();
