@@ -62,7 +62,7 @@ class GarbageController extends AbstractController
             return $this->redirectToRoute("login");
         }
 
-        if (in_array($user, ($garbage->getAddress()?->getUsers()->toArray()) ?? [])) {
+        if (!in_array($user, ($garbage->getAddress()?->getUsers()->toArray()) ?? [])) {
             throw new AccessDeniedException("Vous n'avez pas le droit d'accéder à ces données.");
         }
 
