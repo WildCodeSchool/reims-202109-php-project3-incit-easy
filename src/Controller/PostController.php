@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\Security;
 use App\Entity\Like;
 use App\Repository\LikeRepository;
 use Doctrine\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 #[Route('/post')]
@@ -29,11 +30,13 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 class PostController extends AbstractController
 {
     #[Route('/', name: 'post_index', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function index(
         Request $request,
         PostRepository $postRepository,
         EntityManagerInterface $entityManager
     ): Response {
+
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -58,6 +61,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}/comment', name: 'post_comment_new', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function addComment(Post $post, Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comment();
@@ -75,6 +79,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}', name: 'post_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Post $post): Response
     {
         return $this->render('post/show.html.twig', [
@@ -83,6 +88,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'post_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PostType::class, $post);
@@ -101,6 +107,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}', name: 'post_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), (string)$request->request->get('_token'))) {
@@ -112,6 +119,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}/like', name: 'post_like', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function like(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
     {
         /** @var \App\Entity\User $user */
@@ -142,6 +150,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{id}/like', name: 'post_like', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function likeUsingAPI(Post $post, EntityManagerInterface $manager, LikeRepository $likeRepository): Response
     {
         /** @var \App\Entity\User $user */
