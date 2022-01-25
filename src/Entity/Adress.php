@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\AdressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,7 +39,7 @@ class Adress
     private Collection $garbages;
 
     /**
-     * @ORM\OneToMany(targetEntity=user::class, mappedBy="adress", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="adress", orphanRemoval=true)
      */
     private Collection $users;
 

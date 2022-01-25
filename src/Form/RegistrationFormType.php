@@ -6,7 +6,6 @@ use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -66,22 +65,7 @@ class RegistrationFormType extends AbstractType
                 '3' => ('3'),
                 '4' => ('4'),
             ]])
-
-            ->add('street', TextType::class, ['attr' =>
-            ['placeholder' => '6 rue de saint-brice',
-            'class' => 'form-street' ]
-            ])
-
-            ->add('zipcode', NumberType::class, ['attr' =>
-            ['placeholder' => '51100',
-            'class' => 'form-zipcode' ]
-            ])
-
-            ->add('city', TextType::class, ['attr' =>
-            ['placeholder' => 'Reims',
-            'class' => 'form-city' ]
-            ])
-
+            ->add('adress', AdressRegistrationType::class)
             ->add('email', TextType::class, ['attr' =>
             ['placeholder' => 'example@gmail.com',
             'class' => 'form-email' ]

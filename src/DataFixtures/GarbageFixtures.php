@@ -25,12 +25,10 @@ class GarbageFixtures extends Fixture implements DependentFixtureInterface
             $garbage->setType($matches[3][$i]);
             $garbage->setWeight($matches[4][$i]);
             $adress = $this->getReference($matches[1][$i]);
-            if (empty($adress->getUsers())) {
-                $garbage->setAdress($this->getReference($matches[1][$i]));
-            } else {
-                foreach ($adress->getUsers() as $user) {
-                    $garbage->setUser($user);
-                }
+            $garbage->setAdress($adress);
+
+            foreach ($adress->getUsers() as $user) {
+                $garbage->setUser($user);
             }
             $manager->persist($garbage);
             if ($i % 400 === 0) {

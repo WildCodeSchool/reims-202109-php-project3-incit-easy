@@ -87,6 +87,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $likes;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 240}, nullable="true")
+     */
+    private int $nonRecycledObjective;
+
+    /**
+     * @ORM\Column(type="integer", options={"default" : 55}, nullable="true")
+     */
+    private int $recycledObjective;
+
     public function __construct()
     {
         $this->garbages = new ArrayCollection();
@@ -94,6 +104,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->nonRecycledObjective = 240;
+        $this->recycledObjective = 55;
     }
 
     public function getId(): ?int
@@ -362,6 +374,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $like->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNonRecycledObjective(): ?int
+    {
+        return $this->nonRecycledObjective;
+    }
+
+    public function setNonRecycledObjective(int $nonRecycledObjective): self
+    {
+        $this->nonRecycledObjective = $nonRecycledObjective;
+
+        return $this;
+    }
+
+    public function getRecycledObjective(): ?int
+    {
+        return $this->recycledObjective;
+    }
+
+    public function setRecycledObjective(int $recycledObjective): self
+    {
+        $this->recycledObjective = $recycledObjective;
 
         return $this;
     }
