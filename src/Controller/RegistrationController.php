@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,8 @@ class RegistrationController extends AbstractController
     public function register(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AddressRepository $addressRepository
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -34,6 +36,21 @@ class RegistrationController extends AbstractController
                     strval($form->get('plainPassword')->getData()),
                 )
             );
+
+            $addressSpec = $user->getAddress();
+            $address = null;
+
+            if ($addressSpec) {
+                $address = $addressRepository->findOneBy([
+                    "street" => $addressSpec->getStreet(),
+                    "zipcode" => $addressSpec->getZipcode(),
+                    "city" => $addressSpec->getCity()
+                ]);
+            }
+
+            if ($address) {
+                $user->setAddress($address);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();

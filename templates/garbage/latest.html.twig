@@ -5,6 +5,8 @@
 {% block body %}
     {% set yearly_recycled_data = 0 %}
     {% set yearly_nonrecycled_data = 0 %}
+    {% set yearly_recycled_objective = app.user.recycledObjective * app.user.nbHousehold %}
+    {% set yearly_nonrecycled_objective = app.user.nonRecycledObjective * app.user.nbHousehold %}
 
     {% if yearlyGarbages|length != 0 %}
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'recycled') %}
@@ -13,8 +15,6 @@
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'nonRecycled') %}
             {% set yearly_nonrecycled_data = yearly_nonrecycled_data + garbage.weight %}
         {% endfor %}
-        {% set yearly_recycled_objective = app.user.recycledObjective * app.user.nbHousehold %}
-        {% set yearly_nonrecycled_objective = app.user.nonRecycledObjective * app.user.nbHousehold %}
     {% endif %}
 
     {% set total_weight = 0 %}

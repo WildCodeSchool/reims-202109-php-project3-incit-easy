@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Garbage;
-use App\Entity\User;
+use App\Entity\Address;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,29 +25,29 @@ class GarbageRepository extends ServiceEntityRepository
     //  * @return Garbage[] Returns an array of Garbage objects
     //  */
 
-    public function findByWeek(DateTime $value, User $user): mixed
+    public function findByWeek(DateTime $value, Address $address): mixed
     {
         return $this->createQueryBuilder('g')
             ->andWhere('date_diff(date_add(:val, (6 - weekday(:val)), \'day\'),
             g.createdAt) < 7')
             ->andWhere('date_diff(date_add(:val, (6 - weekday(:val)), \'day\'),
             g.createdAt) >= 0')
-            ->andWhere('g.user = :user')
+            ->andWhere('g.address = :address')
             ->setParameter('val', $value)
-            ->setParameter('user', $user)
+            ->setParameter('address', $address)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    public function findByYear(DateTime $value, User $user): mixed
+    public function findByYear(DateTime $value, Address $address): mixed
     {
         return $this->createQueryBuilder('g')
             ->andWhere('SUBSTRING(g.createdAt, 1, 4) = SUBSTRING(:val, 1, 4)')
             ->andWhere('g.createdAt <= :val')
-            ->andWhere('g.user = :user')
+            ->andWhere('g.address = :address')
             ->setParameter('val', $value)
-            ->setParameter('user', $user)
+            ->setParameter('address', $address)
             ->getQuery()
             ->getResult()
         ;

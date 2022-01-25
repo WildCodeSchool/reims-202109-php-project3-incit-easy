@@ -51,12 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeImmutable $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Garbage::class, mappedBy="user")
-     * @ORM\OrderBy({"createdAt" = "DESC"})
-     */
-    private Collection $garbages;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
@@ -67,10 +61,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private int $nbHousehold;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adress::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Adress $adress;
+    private ?Address $address;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user", orphanRemoval=true)
@@ -99,7 +93,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->garbages = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable("now");
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -223,36 +216,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Garbage[]
-     */
-    public function getGarbages(): Collection
-    {
-        return $this->garbages;
-    }
-
-    public function addGarbage(Garbage $garbage): self
-    {
-        if (!$this->garbages->contains($garbage)) {
-            $this->garbages[] = $garbage;
-            $garbage->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGarbage(Garbage $garbage): self
-    {
-        if ($this->garbages->removeElement($garbage)) {
-            // set the owning side to null (unless already changed)
-            if ($garbage->getUser() === $this) {
-                $garbage->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -277,14 +240,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdress(): ?Adress
+    public function getAddress(): ?Address
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(?Adress $adress): self
+    public function setAddress(?Address $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
         return $this;
     }
 
