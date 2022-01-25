@@ -2,6 +2,7 @@
     font-size: 2rem;
     padding: 1rem;
     color: #eee;
+    text-shadow: $primary-color 1px 0px 2px;
 }
 
 .objective-grid {
@@ -35,14 +36,14 @@
         }
 
         &-weekly {
-            background-color: rgb(12, 151, 65);
+            background-color: #26a86b;
             border-bottom-left-radius: 50% 0%;
             border-bottom-right-radius: 50% 0%;
             border-top-left-radius: 90% 0%;
         }
 
         &-yearly {
-            background-color: rgb(16, 179, 78);
+            background-color: #2dd184;
             border-bottom-left-radius: 0% 0%;
             border-bottom-right-radius: 100% 25%;
         }
@@ -84,22 +85,23 @@
         justify-content: center;
         align-items: center;
 
-        li {
+        p {
+            margin: 1rem;
+            font-size: 1.35rem;
+            font-weight: bold;
+        }
+
+        i {
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2rem;
             background-color: $tertiary-color;
+            color: $secondary-color;
             aspect-ratio: 1/1;
             width: 3rem;
             margin-left: 1rem;
             border-radius: 50%;
-        }
-
-        p {
-            margin: 1rem;
-            font-size: 1.35rem;
-            font-weight: bold;
         }
     }
 

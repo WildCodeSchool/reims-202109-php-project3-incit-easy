@@ -194,6 +194,7 @@
             margin-bottom: 2rem;
             font-size: 2rem;
             color: #eee;
+            text-shadow: $primary-color 1px 0px 2px;
         }
 
         .objective {
@@ -231,6 +232,10 @@
 
         span {
             font-size: 1.8rem;
+        }
+
+        a {
+            text-shadow: $primary-color 1px 0px 2px;
         }
     }
 
