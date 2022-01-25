@@ -1,11 +1,10 @@
 <section class="garbage-list-section">
     <h2>Historique des levées</h2>
-    {% if app.user == user %}
     <ul class="garbage-list">
     {% for garbage in garbages|slice(0, limit) %}
         <li>
-            <a href="{{ path("garbage_show", {id: garbage.getId}) }}">
-                <span>{{ garbage.getCreatedAt|date("m/d/Y") }}</span>
+            <a href="{{ path("garbage_show", {id: garbage.id}) }}">
+                <span>{{ garbage.createdAt|date("m/d/Y") }}</span>
                 <span>{{ garbage.weight }} kg</span>
                 {% if garbage.type == 'recycled' %}
                 <i class="fas fa-recycle"></i>
@@ -16,7 +15,4 @@
         </li>
     {% endfor %}
     </ul>
-    {% else %}
-        <p>Vous n'avez pas accès à ce contenu</p>
-    {% endif %}
 </section>

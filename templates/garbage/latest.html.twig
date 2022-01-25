@@ -5,6 +5,8 @@
 {% block body %}
     {% set yearly_recycled_data = 0 %}
     {% set yearly_nonrecycled_data = 0 %}
+    {% set yearly_recycled_objective = app.user.recycledObjective * app.user.nbHousehold %}
+    {% set yearly_nonrecycled_objective = app.user.nonRecycledObjective * app.user.nbHousehold %}
 
     {% if yearlyGarbages|length != 0 %}
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'recycled') %}
@@ -13,8 +15,6 @@
         {% for garbage in yearlyGarbages|filter(garbage => garbage.type == 'nonRecycled') %}
             {% set yearly_nonrecycled_data = yearly_nonrecycled_data + garbage.weight %}
         {% endfor %}
-        {% set yearly_recycled_objective = 55 * yearlyGarbages|first.user.nbHousehold %}
-        {% set yearly_nonrecycled_objective = 240 * yearlyGarbages|first.user.nbHousehold %}
     {% endif %}
 
     {% set total_weight = 0 %}
@@ -22,11 +22,10 @@
         {% for garbage in garbages %}
             {% set total_weight = total_weight + garbage.weight %}
         {% endfor %}
-        {% set total_objectif = 5.6 * garbages|first.user.nbHousehold %}
     {% else %}
-        {% set total_objectif = 5.6 * app.user.nbHousehold %}
         {% set total_weight = 0.1 %}
     {% endif %}
+    {% set total_objectif = (yearly_nonrecycled_objective + yearly_recycled_objective) / 52|round %}
 
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
@@ -56,9 +55,11 @@
                     <div class='second-warning warning'></div>
                     <div class='final-warning warning'></div>
                 </div>
-                <p class="max-garbage">{{ total_objectif|round }}kg</p>
+                <p class="max-garbage"><a href="{{ path('user_objectives', {id: app.user.id}) }}" style="color: #eee;">{{ total_objectif|round }}kg</a></p>
             </div>
-            {% if total_weight < total_objectif %}
+            {% if total_weight == 0.1 %}
+                <p class="commentary">Aucune levée n'a été enregistrée cette semaine !</p>
+            {% elseif total_weight < total_objectif %}
                 <p class="commentary">Génial ! Un vrai exemple pour la communauté !</p>
             {% elseif total_weight == total_objectif %}
                 <p class="commentary">Bravo ! Vous avez respecté votre objectif !</p>
@@ -70,7 +71,7 @@
             <div class='garbage-detail-container'>
                 <h2>Vos objectifs à l'année</h2>
                 <div class="garbage-details">
-                    <div class="objective">{{ yearly_nonrecycled_objective }}kg</div>
+                    <div class="objective"><a href="{{ path('user_objectives', {id: app.user.id}) }}" style="color: #eee;">{{ yearly_nonrecycled_objective }}kg</a></div>
                     <div class="black">
                         <p class="fas fa-trash icon"></p>
                         <p><span>{{ yearly_nonrecycled_data|round }}kg</span></p>
@@ -78,7 +79,7 @@
                             <div class="line-progress-bar non-recycled" style="width:{{ (yearly_nonrecycled_data / yearly_nonrecycled_objective) * 100 }}%"></div>
                         </div>
                     </div>
-                    <div class="objective">{{ yearly_recycled_objective }}kg</div>
+                    <div class="objective"><a href="{{ path('user_objectives', {id: app.user.id}) }}" style="color: #eee;">{{ yearly_recycled_objective }}kg</a></div>
                     <div class="yellow">
                         <p class="fas fa-recycle icon"></p>
                         <p><span>{{ yearly_recycled_data|round }}kg</span></p>

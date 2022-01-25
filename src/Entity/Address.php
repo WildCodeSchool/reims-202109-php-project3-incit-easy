@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\AdressRepository;
+use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AdressRepository::class)
+ * @ORM\Entity(repositoryClass=AddressRepository::class)
  */
-class Adress
+class Address
 {
     /**
      * @ORM\Id
@@ -35,12 +35,13 @@ class Adress
     private string $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=Garbage::class, mappedBy="adress")
+     * @ORM\OneToMany(targetEntity=Garbage::class, mappedBy="address")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private Collection $garbages;
 
     /**
-     * @ORM\OneToMany(targetEntity=user::class, mappedBy="adress", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="address", orphanRemoval=true)
      */
     private Collection $users;
 
@@ -69,7 +70,7 @@ class Adress
 
     public function setStreet(string $street): self
     {
-        $this->street = $street;
+        $this->street = strtoupper($street);
 
         return $this;
     }
@@ -93,7 +94,7 @@ class Adress
 
     public function setCity(string $city): self
     {
-        $this->city = $city;
+        $this->city = strtoupper($city);
 
         return $this;
     }
@@ -110,7 +111,7 @@ class Adress
     {
         if (!$this->garbages->contains($garbage)) {
             $this->garbages[] = $garbage;
-            $garbage->setAdress($this);
+            $garbage->setAddress($this);
         }
 
         return $this;
@@ -120,8 +121,8 @@ class Adress
     {
         if ($this->garbages->removeElement($garbage)) {
             // set the owning side to null (unless already changed)
-            if ($garbage->getAdress() === $this) {
-                $garbage->setAdress(null);
+            if ($garbage->getAddress() === $this) {
+                $garbage->setAddress(null);
             }
         }
 
@@ -140,7 +141,7 @@ class Adress
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setAdress($this);
+            $user->setAddress($this);
         }
 
         return $this;
@@ -150,8 +151,8 @@ class Adress
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getAdress() === $this) {
-                $user->setAdress(null);
+            if ($user->getAddress() === $this) {
+                $user->setAddress(null);
             }
         }
 

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="objectives-section">
+    <h1 class="section-title">Vos objectifs</h1>
+    <div class="objectives-container">
+        <div class="objectives-container-person objective-grid">
+            <h2>Par personne</h2>
+            <div class="objective-data">
+                <li class="fas fa-trash icon"></li>
+                <p>{{ user.nonRecycledObjective }}kg</p>
+            </div>
+            <div class="objective-data">
+                <li class="fas fa-recycle icon"></li>
+                <p>{{ user.recycledObjective }}kg</p>
+            </div>
+        </div>
+        <div class="objectives-container-weekly objective-grid">
+            <h2>Par semaine</h2>
+            <div class="objective-data">
+                <li class="fas fa-trash icon"></li>
+                <p>{{ (user.nonRecycledObjective * user.nbHousehold / 52)|round }}kg</p>
+            </div>
+            <div class="objective-data">
+                <li class="fas fa-recycle icon"></li>
+                <p>{{ (user.recycledObjective * user.nbHousehold / 52)|round }}kg</p>
+            </div>
+        </div>
+        <div class="objectives-container-yearly objective-grid">
+            <h2>Par an</h2>
+            <div class="objective-data">
+                <li class="fas fa-trash icon"></li>
+                <p>{{ user.nonRecycledObjective * user.nbHousehold }}kg</p>
+            </div>
+            <div class="objective-data">
+                <li class="fas fa-recycle icon"></li>
+                <p>{{ user.recycledObjective * user.nbHousehold }}kg</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="objective-info">
+    <h1 class="section-title">Objectif total</h1>
+    <div class="total-objective">
+        <i class="fas fa-trash-restore-alt"></i>
+        <p>{{ (user.recycledObjective + user.nonRecycledObjective) * user.nbHousehold }}kg par an</p>
+    </div>
+    <div class="objectives-explained">
+        <p><i class="fas fa-info-circle"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam, dui a finibus tempor, quam risus mollis sem, in feugiat urna enim consectetur ex. Nunc a arcu gravida, elementum eros quis, auctor metus.</p>
+    </div>
+    <a href="#from-objectives" class="fas fa-chevron-down"></a>
+</section>
+<section class="modify-objectives-section">
+    <h1 class="section-title">Fixez vous vos propres objectifs !</h1>
+    {{ form_start(ObjectivesTypeForm, {'attr': {'class': 'form-register'}}) }}
+    {{ form_row(ObjectivesTypeForm.recycledObjective, {'label': 'Nouvel objectif déchets recyclables en kg: '}) }}
+    {{ form_row(ObjectivesTypeForm.nonRecycledObjective, {'label': 'Nouvel objectif déchets non-recyclables en kg: '}) }}
+    <button type='submit' id="form-objectives">Valider</button>
+    {{ form_end(ObjectivesTypeForm) }}
+</section>
+{% endblock %}

@@ -10,9 +10,9 @@
         {{ render(controller('App\\Controller\\UserController::show', {user: user})) }}
     </div>
     <div class="profile-garbage">
-        {{ render(controller('App\\Controller\\UserController::showGarbages', {user: user, limit: limit})) }}
+        {{ render(controller('App\\Controller\\AddressController::showGarbages', {address: user.address, limit: limit})) }}
         {% if app.user is same as(user) %}
-            <a href="{{ path('user_garbage', {id: user.id}) }}" class="see-more-garbage">Voir plus</a>
+            <a href="{{ path('address_garbage', {id: user.address.id}) }}" class="see-more-garbage">Voir plus</a>
         {% endif %}
     </div>
 </div>

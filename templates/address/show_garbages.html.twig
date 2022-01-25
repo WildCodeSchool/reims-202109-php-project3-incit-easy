@@ -1,0 +1,5 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'garbage/_list.html.twig' with {garbages: address.garbages, limit: limit} %}
+{% endblock %}

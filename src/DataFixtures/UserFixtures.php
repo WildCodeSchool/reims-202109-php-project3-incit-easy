@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
         );
 
         $userOne->setPassword($hashedPassword);
-        $userOne->setAdress($this->getReference("6 AVENUE DE LAON 51100 REIMS"));
+        $userOne->setAddress($this->getReference("6 AVENUE DE LAON 51100 REIMS"));
         $manager->persist($userOne);
         $this->addReference("user_0", $userOne);
 
@@ -45,7 +45,7 @@ class UserFixtures extends Fixture
         );
 
         $userTwo->setPassword($hashedPassword);
-        $userTwo->setAdress($this->getReference("37 RUE BOUDET 51100 REIMS"));
+        $userTwo->setAddress($this->getReference("37 RUE BOUDET 51100 REIMS"));
         $manager->persist($userTwo);
         $this->addReference("user_1", $userTwo);
 
@@ -57,7 +57,7 @@ class UserFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            AdressFixtures::class
+            AddressFixtures::class
         ];
     }
 }

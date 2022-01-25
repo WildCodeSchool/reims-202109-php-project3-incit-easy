@@ -24,11 +24,6 @@ class Garbage
     private ?\DateTimeImmutable $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="garbages")
-     */
-    private ?User $user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private string $type;
@@ -39,10 +34,9 @@ class Garbage
     private float $weight;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adress::class, inversedBy="garbages")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="garbages")
      */
-    private ?Adress $adress;
+    private ?Address $address;
 
     public function __construct()
     {
@@ -78,18 +72,6 @@ class Garbage
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -114,14 +96,14 @@ class Garbage
         return $this;
     }
 
-    public function getAdress(): ?Adress
+    public function getAddress(): ?Address
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(?Adress $adress): self
+    public function setAddress(?Address $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }

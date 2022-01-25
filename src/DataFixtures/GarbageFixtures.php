@@ -24,14 +24,8 @@ class GarbageFixtures extends Fixture implements DependentFixtureInterface
             $garbage->setCreatedAt(new DateTimeImmutable($matches[2][$i]));
             $garbage->setType($matches[3][$i]);
             $garbage->setWeight($matches[4][$i]);
-            $adress = $this->getReference($matches[1][$i]);
-            if (empty($adress->getUsers())) {
-                $garbage->setAdress($this->getReference($matches[1][$i]));
-            } else {
-                foreach ($adress->getUsers() as $user) {
-                    $garbage->setUser($user);
-                }
-            }
+            $address = $this->getReference($matches[1][$i]);
+            $garbage->setAddress($address);
             $manager->persist($garbage);
             if ($i % 400 === 0) {
                 $manager->flush();
@@ -44,7 +38,7 @@ class GarbageFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
-            AdressFixtures::class
+            AddressFixtures::class
         ];
     }
 }

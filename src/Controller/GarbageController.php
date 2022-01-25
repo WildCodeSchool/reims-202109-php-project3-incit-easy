@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Garbage;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use DateTime;
+use Exception;
 
 #[Route('/garbage', name: 'garbage_')]
 class GarbageController extends AbstractController
@@ -37,9 +38,13 @@ class GarbageController extends AbstractController
             return $this->redirectToRoute("login");
         }
 
+        if ($user->getAddress() == null) {
+            throw new Exception();
+        }
+
         $date = new DateTime();
-        $garbages = $garbageRepository->findByWeek($date, $user);
-        $yearlyGarbages = $garbageRepository->findByYear($date, $user);
+        $garbages = $garbageRepository->findByWeek($date, $user->getAddress());
+        $yearlyGarbages = $garbageRepository->findByYear($date, $user->getAddress());
 
         return $this->render('garbage/latest.html.twig', [
             "garbages" => $garbages,
@@ -50,9 +55,14 @@ class GarbageController extends AbstractController
     #[Route('/{id}', name: 'show')]
     public function show(Garbage $garbage): Response
     {
+        /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
-        if ($user !== $garbage->getUser()) {
+        if ($user == null) {
+            return $this->redirectToRoute("login");
+        }
+
+        if (in_array($user, ($garbage->getAddress()?->getUsers()->toArray()) ?? [])) {
             throw new AccessDeniedException("Vous n'avez pas le droit d'accéder à ces données.");
         }
 
