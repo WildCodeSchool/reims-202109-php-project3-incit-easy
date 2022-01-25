@@ -92,11 +92,10 @@
             }
 
             .content {
-                display: block;
                 background-color: white;
                 color: $primary-color;
                 padding: 0.5rem;
-                overflow: scroll;
+                word-break: break-all;
             }
         }
     }
