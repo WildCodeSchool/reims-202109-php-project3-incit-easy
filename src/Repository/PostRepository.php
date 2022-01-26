@@ -22,8 +22,7 @@ class PostRepository extends ServiceEntityRepository
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
-    
-    public function findByZipcode($value)
+    public function findByZipcode(?string $value): mixed
     {
         return $this->createQueryBuilder('p')
             ->from("App\Entity\User", "u")

@@ -39,6 +39,7 @@ class PostController extends AbstractController
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
+        $address = $user->getAddress();
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -55,7 +56,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('post/index.html.twig', [
-            'posts' => $postRepository->findByZipcode( $user->getAddress()->getZipcode()),
+            'posts' => $postRepository->findByZipcode($address ? $address->getZipcode() : null),
             'postForm' => $form,
         ]);
     }
