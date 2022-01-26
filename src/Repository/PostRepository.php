@@ -22,19 +22,20 @@ class PostRepository extends ServiceEntityRepository
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findByZipcode(?string $value): mixed
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->from("App\Entity\User", "u")
+            ->from("App\Entity\Address", "a")
+            ->andWhere("u = p.user")
+            ->andWhere("a = u.address")
+            ->andWhere('a.zipcode = :val')
             ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Post

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Garbage;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use DateTime;
 use Exception;
 
@@ -16,6 +17,7 @@ use Exception;
 class GarbageController extends AbstractController
 {
     #[Route('/', name: 'index')]
+    #[IsGranted('ROLE_USER')]
     public function index(GarbageRepository $garbageRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -30,6 +32,7 @@ class GarbageController extends AbstractController
     }
 
     #[Route('/latest', name: 'latest')]
+    #[IsGranted('ROLE_USER')]
     public function latest(GarbageRepository $garbageRepository): Response
     {
         /** @var \App\Entity\User $user */
@@ -53,6 +56,7 @@ class GarbageController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show')]
+    #[IsGranted('ROLE_USER')]
     public function show(Garbage $garbage): Response
     {
         /** @var \App\Entity\User $user */

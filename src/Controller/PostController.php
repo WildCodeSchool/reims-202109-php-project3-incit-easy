@@ -37,6 +37,9 @@ class PostController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $address = $user->getAddress();
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -44,8 +47,6 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $date = new DateTimeImmutable();
 
-            /** @var \App\Entity\User $user */
-            $user = $this->getUser();
             $post->setCreatedAt($date)->setUser($user);
             $entityManager->persist($post);
             $entityManager->flush();
@@ -55,7 +56,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('post/index.html.twig', [
-            'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
+            'posts' => $postRepository->findByZipcode($address ? $address->getZipcode() : null),
             'postForm' => $form,
         ]);
     }
