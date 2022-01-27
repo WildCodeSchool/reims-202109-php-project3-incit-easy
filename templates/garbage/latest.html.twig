@@ -30,7 +30,9 @@
     <section class="garbage-dashboard">
         <div class="garbage-total-container">
             <h1>Vos déchets cette semaine</h1>
-            <a href="{{ path('garbage_add') }}" class="add">Ajouter un déchet</a>
+            {% if 'ROLE_ADMIN' in user.roles %}
+                <a href="{{ path('garbage_add') }}" class="add">Ajouter un déchet</a>
+            {% endif %}
             <div class="progress">
                 <div class="overflow">
                     <div class="shift-caliber">

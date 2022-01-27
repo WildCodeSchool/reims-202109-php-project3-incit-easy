@@ -58,6 +58,7 @@ class GarbageController extends AbstractController
         $yearlyGarbages = $garbageRepository->findByYear($date, $user->getAddress());
 
         return $this->render('garbage/latest.html.twig', [
+            "user" => $user,
             "garbages" => $garbages,
             "yearlyGarbages" => $yearlyGarbages
         ]);
