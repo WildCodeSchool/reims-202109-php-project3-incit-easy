@@ -3,4 +3,5 @@
     <p><i class="fas fa-user-friends"></i> {{ user.nbHousehold }}</p>
     <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
     <p><i class="fas fa-city"> </i>{{ user.address.city }} - {{ user.address.zipcode }}</p>
+    <p><i class="fas fa-bullseye"></i><a href="{{ path('user_objectives', {'id': user.id}) }}">Vos objectifs</a></p>
 </section>
