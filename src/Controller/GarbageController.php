@@ -8,10 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Garbage;
+use App\Form\AdminGarbageType;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use DateTime;
+use Doctrine\DBAL\Driver\IBMDB2\Result;
+use Doctrine\ORM\EntityManagerInterface;
+use DoctrineExtensions\Query\Mysql\Rand;
 use Exception;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/garbage', name: 'garbage_')]
 class GarbageController extends AbstractController
@@ -26,8 +31,11 @@ class GarbageController extends AbstractController
             "createdAt" => "DESC",
         ]);
 
+        $limit = 50;
+
         return $this->render('garbage/index.html.twig', [
             "garbages" => $garbages,
+            "limit" => $limit,
         ]);
     }
 
@@ -52,6 +60,28 @@ class GarbageController extends AbstractController
         return $this->render('garbage/latest.html.twig', [
             "garbages" => $garbages,
             "yearlyGarbages" => $yearlyGarbages
+        ]);
+    }
+
+    #[Route('/new', name: 'add')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function add(
+        Request $request,
+        EntityManagerInterface $entityManager,
+    ): Response {
+        $garbage = new Garbage();
+        $form = $this->createForm(AdminGarbageType::class, $garbage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($garbage);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('garbage_add', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('garbage/add.html.twig', [
+            'garbageAddForm' => $form->createView(),
         ]);
     }
 
