@@ -3,6 +3,7 @@
     padding: 1rem;
     color: #eee;
     text-shadow: $primary-color 1px 0px 2px;
+    text-align: center;
 }
 
 .objective-grid {
@@ -124,6 +125,6 @@
     input {
         margin-top: 1rem;
         margin-bottom: 1rem;
-        margin-left: 3rem;
+        text-align: center;
     }
 }
