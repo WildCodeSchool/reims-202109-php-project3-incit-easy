@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(garbageAddForm, {'attr': {'class': 'form-register'}}) }}
+    {{ form_row(garbageAddForm.type, {'label': 'Type de déchet'}) }}
+    {{ form_row(garbageAddForm.weight, {'label': 'Poids en kilo'}) }}
+    {{ form_row(garbageAddForm.address, {'label': 'Adresse'}) }}
+    <button type='submit' id="form-objectives">Ajouter</button>
+    {{ form_end(garbageAddForm) }}
+{% endblock %}
