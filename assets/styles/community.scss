@@ -28,7 +28,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: 1.5rem;
-            padding: 0 3rem 0 3rem;
+            padding: 0 3rem 1.5rem 3rem;
 
             h2 {
                 color: white;
@@ -67,9 +67,9 @@
                 text-decoration: none;
                 font-size: large;
                 border-radius: 25px;
-                border: 1px solid black;
+                border: none;
                 color: black;
-                background-color: white ;
+                background-color: #eee ;
                 font-weight:bolder;
                 padding: 0.3rem 1rem 0.3rem 1rem;
             }
@@ -112,6 +112,8 @@
             font-size: large;
             font-weight:bolder;
             align-items: center;
+            background: none;
+            color: #eee;
         }
 
         .fa-circle {
