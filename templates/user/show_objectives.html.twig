@@ -52,8 +52,8 @@
 <section class="modify-objectives-section">
     <h1 class="section-title">Fixez vous vos propres objectifs !</h1>
     {{ form_start(ObjectivesTypeForm, {'attr': {'class': 'form-register'}}) }}
-    {{ form_row(ObjectivesTypeForm.recycledObjective, {'label': 'Nouvel objectif déchets recyclables en kg: '}) }}
-    {{ form_row(ObjectivesTypeForm.nonRecycledObjective, {'label': 'Nouvel objectif déchets non-recyclables en kg: '}) }}
+    {{ form_row(ObjectivesTypeForm.recycledObjective, {'label': 'Nouvel objectif déchets recyclables par personne en kg: '}) }}
+    {{ form_row(ObjectivesTypeForm.nonRecycledObjective, {'label': 'Nouvel objectif déchets non-recyclables par personne en kg: '}) }}
     <button type='submit' id="form-objectives">Valider</button>
     {{ form_end(ObjectivesTypeForm) }}
 </section>
